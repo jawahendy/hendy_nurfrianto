@@ -5,38 +5,43 @@ export const ourClientData = {
 			id: 1,
 			slides: [
 				{
-					alt: 'astra-inter',
+					alt: 'astra international',
 					src: '/image/clients/astra-inter.png',
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
 				},
 				{
-					alt: 'agit',
+					alt: 'Agit',
 					src: '/image/clients/agit.webp',
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
 				},
 				{
-					alt: 'trakindo',
+					alt: 'Trakindo',
 					src: '/image/clients/trakindo.webp',
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
 				},
 				{
-					alt: 'pama',
+					alt: 'Pama',
 					src: '/image/clients/pama.webp',
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
 				},
 				{
-					alt: 'rui',
+					alt: 'Radiant (RUI)',
 					src: '/image/clients/rui.png',
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
 				},
 				{
-					alt: 'gordi',
+					alt: 'Gordi',
 					src: '/image/clients/Gordi.png',
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
 				},
 				{
-					alt: 'celerates',
+					alt: 'Celerates',
 					src: '/image/clients/Cele.png',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'AdIns',
+					src: '/image/clients/ads.png',
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
 				},
 			],

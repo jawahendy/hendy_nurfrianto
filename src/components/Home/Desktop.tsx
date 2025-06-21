@@ -71,7 +71,7 @@ const Desktop = () => {
                 <Image src="/image/Web.png" alt="Profile Picture" fill sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw, 60vw" style={{ objectFit: 'contain' }} />
             </div>
             <div className="col-span-3 row-span-3 row-start-5 bg-slate-600 rounded-2xl overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 flex flex-col items-center justify-center text-center gap-y-4 py-6 relative">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 absolute left-1/2 -translate-x-1/2 top-6">My Clients</h3>
+                <h3 className="text-lg md:text-xl font-bold text-white mb-4 absolute left-1/2 -translate-x-1/2 top-6">Working Experiance</h3>
                 <div className="pt-16 w-full flex flex-col items-center justify-center gap-y-4">
                     {ourClientData.list.map((client) => (
                         <Carousel
@@ -88,8 +88,8 @@ const Desktop = () => {
                             className="w-full max-w-full px-10">
                             <CarouselContent>
                                 {client.slides.map((slide) => (
-                                    <CarouselItem key={slide.alt} className="flex items-center justify-center basis-1/3">
-                                        <div className='h-[52px] lg:h-[129px] aspect-video relative w-40 sm:w-52 max-w-full max-h-full' style={slide.style}>
+                                    <CarouselItem key={slide.alt} className="flex flex-col items-center justify-start basis-1/3">
+                                        <div className='h-[52px] lg:h-[129px] aspect-video relative w-40 sm:w-52 max-w-full max-h-full flex items-center justify-center' style={slide.style}>
                                             <Image
                                                 src={slide.src}
                                                 alt={slide.alt}
@@ -98,6 +98,7 @@ const Desktop = () => {
                                                 className='w-full h-full object-contain max-w-full max-h-full'
                                             />
                                         </div>
+                                        <span className="text-xs text-white mt-2 text-center w-full break-words whitespace-normal">{slide.alt}</span>
                                     </CarouselItem>
                                 ))}
                             </CarouselContent>
@@ -106,7 +107,7 @@ const Desktop = () => {
                 </div>
             </div>
             <div className="col-span-4 row-span-3 col-start-4 row-start-5 bg-slate-600 overflow-hidden rounded-2xl bg-white/20 backdrop-blur-md border border-white/30">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 absolute left-1/2 -translate-x-1/2 top-6">Skills</h3>
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-4 absolute left-1/2 -translate-x-1/2 top-6">Skills</h3>
                 <div className="pt-16 w-full flex flex-col items-center justify-center gap-y-4">
                     {Skills.list.map((client) => (
                         <Carousel
