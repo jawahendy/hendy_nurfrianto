@@ -78,7 +78,7 @@ export const Skills = {
 				},
 				{
 					alt: 'Tailwind CSS',
-					src: '/image/skills/tailwind.png',
+					src: '/image/skills/Tailwind.png',
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
 				},
 				{
@@ -174,7 +174,7 @@ export const Skills2 = {
 				},
 				{
 					alt: 'ios',
-					src: '/image/skills/ios.png',
+					src: '/image/skills/Ios.png',
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
 				},
 				{
