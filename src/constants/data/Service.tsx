@@ -222,6 +222,26 @@ export const Skills2 = {
 					src: '/image/skills/unity.png',
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
 				},
+				{
+					alt: 'Chart js',
+					src: '/image/skills/chart.png',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'Dynatrace',
+					src: '/image/skills/dynatrace.png',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'Grafana',
+					src: '/image/skills/grafana.png',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'Redis',
+					src: '/image/skills/redis.png',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
 			],
 		},
 	],

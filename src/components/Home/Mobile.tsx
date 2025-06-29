@@ -6,8 +6,10 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 import { ourClientData, Skills, Skills2 } from '@/constants/data/Service';
 import Autoplay from 'embla-carousel-autoplay';
 import { m } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 const Mobile = () => {
+    const router = useRouter();
     return (
         <div className="grid sm:hidden grid-cols-3 grid-rows-9 gap-4 p-3 max-w-screen-2xl min-h-screen w-full overflow-y-auto max-h-screen">
             <m.div
@@ -26,13 +28,8 @@ const Mobile = () => {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
-                onClick={() => window.open('https://drive.google.com/drive/folders/1Y2T8prWNpxZ9nxEz6mHjsLIhL_2P1Feg?usp=sharing', '_blank')}
-                className="hover:cursor-pointer col-span-3 row-span-2 row-start-3 bg-slate-600 rounded-2xl mt-12 h-52 bg-white/20 backdrop-blur-md border border-white/30 relative flex flex-col items-center justify-center px-4 pt-4 pb-2"
+                className="col-span-3 row-span-2 row-start-3 bg-slate-600 rounded-2xl mt-12 h-52 bg-white/20 backdrop-blur-md border border-white/30 relative flex flex-col items-center justify-center px-4 pt-4 pb-2"
             >
-                {/* Arrow Up Right Icon */}
-                <span className="absolute top-1 right-1 bg-white/30 backdrop-blur-md rounded-full p-1 flex items-center justify-center">
-                    <ArrowUpRight className='w-4 h-4 text-white' />
-                </span>
                 <h2 className="text-2xl font-bold text-white text-center w-full z-10 mb-2">About Me</h2>
                 <p className="text-white/80 text-sm text-center">I enjoy building interactive, user-friendly web experiences, mobile apps and I always eager to learn new technologies to improve my craft.</p>
             </m.div>
@@ -82,8 +79,13 @@ const Mobile = () => {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: 'easeOut', delay: 0.3 }}
-                className="col-span-3 row-span-2 row-start-7 bg-slate-600 rounded-2xl mt-36 h-60 bg-white/20 backdrop-blur-md border border-white/30 relative flex flex-col items-center justify-center px-2 py-4"
+                onClick={() => router.push('/skill')}
+                className="hover:cursor-pointer col-span-3 row-span-2 row-start-7 bg-slate-600 rounded-2xl mt-36 h-60 bg-white/20 backdrop-blur-md border border-white/30 relative flex flex-col items-center justify-center px-2 py-4"
             >
+                {/* Arrow Up Right Icon */}
+                <span className="absolute top-1 right-1 bg-white/30 backdrop-blur-md rounded-full p-1 flex items-center justify-center">
+                    <ArrowUpRight className='w-4 h-4 text-white' />
+                </span>
                 <h3 className="text-xl font-bold text-white mb-2 mt-3 text-center w-full z-10">Skills</h3>
                 <div className="w-full flex flex-col items-center justify-center gap-y-2">
                     {Skills.list.map((client) => (
@@ -188,15 +190,15 @@ const Mobile = () => {
                         </svg>
                     </div>
                     {/* Instagram */}
-                    <div 
-                    onClick={() => window.open('https://www.instagram.com/hendy__n/', '_blank')}
-                    className="hover:cursor-pointer bg-slate-600 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl flex items-center justify-center text-white font-semibold relative">
-                        <span className="absolute top-1 right-1 bg-white/30 backdrop-blur-md rounded-full p-1 flex items-center justify-center">
-                            <ArrowUpRight className='w-4 h-4 text-white' />
-                        </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zm4.25 3.25a5.25 5.25 0 1 1 0 10.5 5.25 5.25 0 0 1 0-10.5zm0 1.5a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5zm5.13.62a1.13 1.13 0 1 1-2.25 0 1.13 1.13 0 0 1 2.25 0z" />
-                        </svg>
+                    <div
+                        onClick={() => window.open('https://drive.google.com/drive/folders/1Y2T8prWNpxZ9nxEz6mHjsLIhL_2P1Feg?usp=sharing', '_blank')}
+                        className="hover:cursor-pointer bg-slate-600 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl flex items-center justify-center text-white font-semibold relative">
+                        <button
+                            className="px-6 py-2 bg-white/10 backdrop-blur-md border border-white/30 text-white font-semibold rounded-full shadow-lg transition"
+                            style={{ zIndex: 1 }}
+                        >
+                            Hire Me
+                        </button>
                     </div>
                 </div>
             </m.div>

@@ -6,9 +6,11 @@ import Image from 'next/image';
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Autoplay from 'embla-carousel-autoplay';
 import { m } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 
 const Desktop = () => {
+    const router = useRouter();
     return (
         <div className="hidden sm:grid grid-cols-7 grid-rows-7 gap-3 p-10 flex-1 max-w-screen-2xl h-full min-h-screen">
             <m.div
@@ -31,13 +33,7 @@ const Desktop = () => {
                 initial={{ opacity: 0, x: -60 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: 'easeOut' }}
-                whileHover={{ scaleX: [1, 0.8, 1], scaleY:[1, 1.2, 1] }}
-                onClick={() => window.open('https://drive.google.com/drive/folders/1Y2T8prWNpxZ9nxEz6mHjsLIhL_2P1Feg?usp=sharing', '_blank')}
                 className="hover:cursor-pointer col-span-4 row-span-2 col-start-1 row-start-3 bg-slate-600 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex flex-col justify-center px-8">
-                {/* Arrow Up Right Icon */}
-                <span className="absolute top-1 right-1 bg-white/30 backdrop-blur-md rounded-full p-1 flex items-center justify-center">
-                    <ArrowUpRight className='w-4 h-4 text-white' />
-                </span>
                 <h2 className="text-lg md:text-xl font-semibold text-white mb-2">About Me</h2>
                 <p className="text-white/80 text-sm md:text-base">I enjoy building interactive, user-friendly web experiences, mobile apps and I always eager to learn new technologies to improve my craft.</p>
             </m.div>
@@ -77,16 +73,15 @@ const Desktop = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
                 whileHover={{ scaleX: [1, 0.8, 1], scaleY:[1, 1.2, 1] }}
-                onClick={() => window.open('https://www.instagram.com/hendy__n/', '_blank')}
+                onClick={() => window.open('https://drive.google.com/drive/folders/1Y2T8prWNpxZ9nxEz6mHjsLIhL_2P1Feg?usp=sharing', '_blank')}
                 className="hover:cursor-pointer col-start-7 row-start-2 bg-slate-600 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center"
             >
-                <span className="absolute top-1 right-1 bg-white/30 backdrop-blur-md rounded-full p-1 flex items-center justify-center">
-                    <ArrowUpRight className='w-4 h-4 text-white' />
-                </span>
-                {/* Instagram Icon */}
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 md:w-11 md:h-11 text-white" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zm4.25 3.25a5.25 5.25 0 1 1 0 10.5 5.25 5.25 0 0 1 0-10.5zm0 1.5a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5zm5.13.62a1.13 1.13 0 1 1-2.25 0 1.13 1.13 0 0 1 2.25 0z" />
-                </svg>
+                <button
+                    className="px-6 py-2 bg-white/10 backdrop-blur-md border border-white/30 text-white font-semibold rounded-full shadow-lg transition"
+                    style={{ zIndex: 1 }}
+                >
+                    Hire Me
+                </button>
             </m.div>
             <m.div
                 initial={{ opacity: 0, y: -40 }}
@@ -110,7 +105,7 @@ const Desktop = () => {
                 transition={{ duration: 0.8, ease: 'easeOut' }}
                 className="row-span-2 col-start-5 row-start-3 bg-slate-600 rounded-2xl  relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30"
             >
-                <Image src="/image/Mobile.jpg" alt="Profile Picture" fill sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw, 60vw" style={{ objectFit: 'cover' }} />
+                <Image src="/image/Mobile.png" alt="Profile Picture" fill sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw, 60vw" style={{ objectFit: 'cover' }} />
             </m.div>
             <m.div
                 initial={{ opacity: 0, x: 60 }}
@@ -127,7 +122,7 @@ const Desktop = () => {
                 className="row-span-2 col-start-7 row-start-3 rounded-2xl relative overflow-hidden border border-white/30"
             >
                 <div className="absolute inset-0 bg-black" />
-                <Image src="/image/Web.png" alt="Profile Picture" fill sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw, 60vw" style={{ objectFit: 'contain' }} />
+                <Image src="/image/Web.png" alt="Profile Picture" fill sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw, 60vw" style={{ objectFit: 'cover' }} />
             </m.div>
             <m.div
                 initial={{ opacity: 0, x: -60 }}
@@ -173,8 +168,13 @@ const Desktop = () => {
                 initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: 'easeOut' }}
-                className="col-span-4 row-span-3 col-start-4 row-start-5 bg-slate-600 overflow-hidden rounded-2xl bg-white/20 backdrop-blur-md border border-white/30"
+                onClick={() => router.push('/skill')}
+                className="hover:cursor-pointer col-span-4 row-span-3 col-start-4 row-start-5 bg-slate-600 overflow-hidden rounded-2xl bg-white/20 backdrop-blur-md border border-white/30"
             >
+                {/* Arrow Up Right Icon */}
+                <span className="absolute top-1 right-1 bg-white/30 backdrop-blur-md rounded-full p-1 flex items-center justify-center">
+                    <ArrowUpRight className='w-4 h-4 text-white' />
+                </span>
                 <h3 className="text-xl md:text-2xl font-bold text-white mb-4 absolute left-1/2 -translate-x-1/2 top-6">Skills</h3>
                 <div className="pt-16 w-full flex flex-col items-center justify-center gap-y-4">
                     {Skills.list.map((client) => (
