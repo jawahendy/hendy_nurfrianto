@@ -239,7 +239,7 @@ export const Skills2 = {
 				},
 				{
 					alt: 'Redis',
-					src: '/image/skills/redis.png',
+					src: '/image/skills/Redis.png',
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
 				},
 			],
