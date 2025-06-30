@@ -275,7 +275,7 @@ export const ourPortofolio = {
 			slides: [
 				{
 					alt: 'Lucatris RUI',
-					src: '/image/porto/luc.png',
+					src: '/image/porto/Luc.png',
 					tech: ['React JS', 'Tailwind CSS', 'PostgreSQL', 'Redux', 'Docker', 'express js', 'javascripts', 'chart js', 'mongoDB', 'Redis', 'alibaba cloud'],
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
 					type: 'web',
