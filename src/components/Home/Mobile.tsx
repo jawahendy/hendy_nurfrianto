@@ -157,11 +157,11 @@ const Mobile = () => {
                 transition={{ duration: 0.7, ease: 'easeOut', delay: 0.4 }}
                 className="row-start-9 col-span-3 row-span-2  rounded-2xl h-52 mt-56 flex items-center justify-center"
             >
-                <div className="w-full h-full grid grid-cols-2 grid-rows-2 gap-2">
+                <div className="w-full h-full grid grid-cols-3 grid-rows-2 gap-2">
                     {/* GitHub */}
                     <div 
-                    onClick={() => window.open('https://github.com/jawahendy', '_blank')}
-                    className="hover:cursor-pointer bg-slate-600 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl flex items-center justify-center text-white font-semibold relative">
+                        onClick={() => window.open('https://github.com/jawahendy', '_blank')}
+                        className="hover:cursor-pointer bg-slate-600 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl flex items-center justify-center text-white font-semibold relative">
                         <span className="absolute top-1 right-1 bg-white/30 backdrop-blur-md rounded-full p-1 flex items-center justify-center">
                             <ArrowUpRight className='w-4 h-4 text-white' />
                         </span>
@@ -169,8 +169,8 @@ const Mobile = () => {
                     </div>
                     {/* LinkedIn */}
                     <div 
-                    onClick={() => window.open('https://www.linkedin.com/in/hendy-nurfrianto-4977b0177/', '_blank')}
-                    className="hover:cursor-pointer bg-slate-600 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl flex items-center justify-center text-white font-semibold relative">
+                        onClick={() => window.open('https://www.linkedin.com/in/hendy-nurfrianto-4977b0177/', '_blank')}
+                        className="hover:cursor-pointer bg-slate-600 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl flex items-center justify-center text-white font-semibold relative">
                         <span className="absolute top-1 right-1 bg-white/30 backdrop-blur-md rounded-full p-1 flex items-center justify-center">
                             <ArrowUpRight className='w-4 h-4 text-white' />
                         </span>
@@ -178,27 +178,52 @@ const Mobile = () => {
                             <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.28c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm13.5 11.28h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-10h2.89v1.36h.04c.4-.75 1.38-1.54 2.84-1.54 3.04 0 3.6 2 3.6 4.59v5.59z" />
                         </svg>
                     </div>
-                    {/* YouTube */}
-                    <div 
-                    onClick={() => window.open('https://www.youtube.com/@Bang_hen490', '_blank')}
-                    className="hover:cursor-pointer bg-slate-600 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl flex items-center justify-center text-white font-semibold relative">
+                    <div
+                         onClick={() => router.push('/portofolio')}
+                        className="hover:cursor-pointer bg-slate-600 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl  items-center justify-center text-white font-semibold relative">
+                        {/* Arrow Up Right Icon */}
                         <span className="absolute top-1 right-1 bg-white/30 backdrop-blur-md rounded-full p-1 flex items-center justify-center">
                             <ArrowUpRight className='w-4 h-4 text-white' />
                         </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M23.498 6.186a2.994 2.994 0 0 0-2.112-2.116C19.228 3.5 12 3.5 12 3.5s-7.228 0-9.386.57A2.994 2.994 0 0 0 .502 6.186C0 8.344 0 12 0 12s0 3.656.502 5.814a2.994 2.994 0 0 0 2.112 2.116C4.772 20.5 12 20.5 12 20.5s7.228 0 9.386-.57a2.994 2.994 0 0 0 2.112-2.116C24 15.656 24 12 24 12s0-3.656-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                        </svg>
+                        <div className="flex flex-row items-center justify-center gap-2 mt-4 mb-2">
+                            {/* Web Icon */}
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+                                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20" stroke="currentColor" strokeWidth="2" />
+                            </svg>
+                            {/* Mobile Icon */}
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <rect x="6" y="2" width="12" height="20" rx="3" stroke="currentColor" strokeWidth="2" />
+                                <circle cx="12" cy="18" r="1" fill="currentColor" />
+                            </svg>
+                        </div>
+                        <div className="w-full flex justify-center">
+                            <span className="mt-1 mb-2 text-base font-bold text-white text-center block">Portofolio</span>
+                        </div>
                     </div>
-                    {/* Instagram */}
-                    <div
-                        onClick={() => window.open('https://drive.google.com/drive/folders/1Y2T8prWNpxZ9nxEz6mHjsLIhL_2P1Feg?usp=sharing', '_blank')}
-                        className="hover:cursor-pointer bg-slate-600 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl flex items-center justify-center text-white font-semibold relative">
-                        <button
-                            className="px-6 py-2 bg-white/10 backdrop-blur-md border border-white/30 text-white font-semibold rounded-full shadow-lg transition"
-                            style={{ zIndex: 1 }}
-                        >
-                            Hire Me
-                        </button>
+                    <div className="col-span-3 grid grid-cols-2 gap-2">
+                        {/* YouTube */}
+                        <div 
+                            onClick={() => window.open('https://www.youtube.com/@Bang_hen490', '_blank')}
+                            className="hover:cursor-pointer bg-slate-600 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl flex items-center justify-center text-white font-semibold relative">
+                            <span className="absolute top-1 right-1 bg-white/30 backdrop-blur-md rounded-full p-1 flex items-center justify-center">
+                                <ArrowUpRight className='w-4 h-4 text-white' />
+                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a2.994 2.994 0 0 0-2.112-2.116C19.228 3.5 12 3.5 12 3.5s-7.228 0-9.386.57A2.994 2.994 0 0 0 .502 6.186C0 8.344 0 12 0 12s0 3.656.502 5.814a2.994 2.994 0 0 0 2.112 2.116C4.772 20.5 12 20.5 12 20.5s7.228 0 9.386-.57a2.994 2.994 0 0 0 2.112-2.116C24 15.656 24 12 24 12s0-3.656-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                            </svg>
+                        </div>
+                        {/* Hire me */}
+                        <div
+                            onClick={() => window.open('https://drive.google.com/drive/folders/1Y2T8prWNpxZ9nxEz6mHjsLIhL_2P1Feg?usp=sharing', '_blank')}
+                            className="hover:cursor-pointer bg-slate-600 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl flex items-center justify-center text-white font-semibold relative">
+                            <button
+                                className="px-6 py-2 bg-white/10 backdrop-blur-md border border-white/30 text-white font-semibold rounded-full shadow-lg transition"
+                                style={{ zIndex: 1 }}
+                            >
+                                Hire Me
+                            </button>
+                        </div>
                     </div>
                 </div>
             </m.div>

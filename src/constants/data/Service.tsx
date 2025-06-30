@@ -1,3 +1,4 @@
+
 export const ourClientData = {
 	title: 'Our Client',
 	list: [
@@ -48,7 +49,6 @@ export const ourClientData = {
 		},
 	],
 };
-
 
 export const Skills = {
 	title: 'Skills',
@@ -129,6 +129,26 @@ export const Skills = {
 				{
 					alt: 'alibaba cloud',
 					src: '/image/skills/ali.png',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'Cloudflare',
+					src: '/image/skills/cloude.png',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'Google Cloud',
+					src: '/image/skills/gcp.png',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'PostgreSQL',
+					src: '/image/skills/post.png',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'Rest API',
+					src: '/image/skills/rest.png',
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
 				},
 			],
@@ -241,6 +261,141 @@ export const Skills2 = {
 					alt: 'Redis',
 					src: '/image/skills/Redis.png',
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+			],
+		},
+	],
+};
+
+export const ourPortofolio = {
+	title: 'Portofolio',
+	list: [
+		{
+			id: 1,
+			slides: [
+				{
+					alt: 'Lucatris RUI',
+					src: '/image/porto/luc.png',
+					tech: ['React JS', 'Tailwind CSS', 'PostgreSQL', 'Redux', 'Docker', 'express js', 'javascripts', 'chart js', 'mongoDB', 'Redis', 'alibaba cloud'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'web',
+					link: 'https://lucatris.com/',
+				},
+				{
+					alt: 'Auto2000',
+					src: '/image/porto/auto.png',
+					tech: ['React Native', 'TypeScript', 'Redux', 'Axios', 'figma', 'azure'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'mobile',
+					link: 'https://play.google.com/store/apps/details?id=id.co.astra.ai.dev1&hl=id',
+				},
+				{
+					alt: 'Website Celerates',
+					src: '/image/porto/cele.png',
+					tech: ['Next.js', 'Tailwind CSS', 'TypeScript', 'cloudflare'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'web',
+					link: 'https://celerates.co.id/',
+				},
+				{
+					alt: 'THRU APPS TRAKINDO',
+					src: '/image/porto/rn.png',
+					tech: ['React Native', 'TypeScript', 'Redux', 'Axios', 'aws', 'figma', 'aws'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'mobile',
+					link: 'https://play.google.com/store/apps/details?id=com.tuempapp&hl=id',
+				},
+				{
+					alt: 'Assesmind ',
+					src: '/image/porto/mind.png',
+					tech: ['Next.js', 'Tailwind CSS', 'TypeScript', 'PostgreSQL', 'Prisma', 'Docker', 'express js', 'cloudflare'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'web',
+					link: 'https://assesmind.com/login',
+				},
+				{
+					alt: 'QIMS',
+					src: '/image/porto/qims.png',
+					tech: ['Next.js', 'Tailwind CSS', 'TypeScript', 'PostgreSQL', 'Docker', 'express js', 'Tanstack Query', 'alibaba cloud'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'web',
+				},
+				{
+					alt: 'Cms Celerates',
+					src: '/image/porto/cms.png',
+					tech: ['Next.js', 'Tailwind CSS', 'TypeScript', 'Firebase', 'cloudflare'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'web',
+				},
+				{
+					alt: 'Mobile Apps',
+					src: '/image/porto/clay.png',
+					tech: ['Flutter', 'Dart', 'GetX', 'Firebase'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'mobile',
+				},
+				{
+					alt: 'Online Shop',
+					src: '/image/porto/flut.png',
+					tech: ['Flutter', 'Dart', 'GetX', 'Firebase', 'http'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'mobile',
+				},
+				{
+					alt: 'Movie Apps',
+					src: '/image/porto/ios.png',
+					tech: ['Swift', 'SwiftUI', 'Combine', 'MVVM', 'CoreData', 'Dependency Injection'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'mobile',
+				},
+				{
+					alt: 'Meals Apps',
+					src: '/image/porto/Meals.png',
+					tech: ['Swift', 'SwiftUI', 'Combine', 'MVVM', 'CoreData', 'Dependency Injection'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'mobile',
+				},
+				{
+					alt: 'Online Shop IOS',
+					src: '/image/porto/moto.png',
+					tech: ['Swift', 'SwiftUI', 'Combine', 'MVVM', 'CoreData', 'Dependency Injection'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'mobile',
+				},
+				{
+					alt: 'Note Apps',
+					src: '/image/porto/note.png',
+					tech: ['Flutter', 'Dart', 'GetX', 'Firebase'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'mobile',
+				},
+				{
+					alt: 'Clone Netflix',
+					src: '/image/porto/reactjs.png',
+					tech: ['React JS', 'Tailwind CSS', 'Javascripts', 'Firebase', 'Redux', 'Axios'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'web',
+				},
+				{
+					alt: 'PAMA VR 1',
+					src: '/image/porto/VR.png',
+					tech: ['unity', 'C#', 'Figma', 'Blender', 'PostgreSQL', 'express js', 'oculus vr'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'web',
+				},
+				{
+					alt: 'PAMA VR 2',
+					src: '/image/porto/VR2.png',
+					tech: ['unity', 'C#', 'Figma', 'Blender', 'PostgreSQL', 'express js', 'oculus vr'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'web',
+				},
+				{
+					alt: 'windows Apps HR',
+					src: '/image/porto/windowsflutter.png',
+					tech: ['Flutter', 'Dart', 'GetX', 'http'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'web',
 				},
 			],
 		},

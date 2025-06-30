@@ -41,7 +41,7 @@ const Desktop = () => {
                 initial={{ opacity: 0, y: -40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: 'easeOut' }}
-                whileHover={{ scaleX: [1, 0.8, 1], scaleY:[1, 1.2, 1] }}
+                whileHover={{ scaleX: [1, 0.8, 1], scaleY: [1, 1.2, 1] }}
                 onClick={() => window.open('https://github.com/jawahendy', '_blank')}
                 className="hover:cursor-pointer col-start-6 row-start-1 bg-slate-600 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center relative"
             >
@@ -56,7 +56,7 @@ const Desktop = () => {
                 initial={{ opacity: 0, y: -40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
-                whileHover={{ scaleX: [1, 0.8, 1], scaleY:[1, 1.2, 1] }}
+                whileHover={{ scaleX: [1, 0.8, 1], scaleY: [1, 1.2, 1] }}
                 onClick={() => window.open('https://www.linkedin.com/in/hendy-nurfrianto-4977b0177/', '_blank')}
                 className="hover:cursor-pointer col-start-7 row-start-1 bg-slate-600 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center"
             >
@@ -72,7 +72,7 @@ const Desktop = () => {
                 initial={{ opacity: 0, y: -40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
-                whileHover={{ scaleX: [1, 0.8, 1], scaleY:[1, 1.2, 1] }}
+                whileHover={{ scaleX: [1, 0.8, 1], scaleY: [1, 1.2, 1] }}
                 onClick={() => window.open('https://drive.google.com/drive/folders/1Y2T8prWNpxZ9nxEz6mHjsLIhL_2P1Feg?usp=sharing', '_blank')}
                 className="hover:cursor-pointer col-start-7 row-start-2 bg-slate-600 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center"
             >
@@ -87,7 +87,7 @@ const Desktop = () => {
                 initial={{ opacity: 0, y: -40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: 'easeOut', delay: 0.3 }}
-                whileHover={{ scaleX: [1, 0.8, 1], scaleY:[1, 1.2, 1] }}
+                whileHover={{ scaleX: [1, 0.8, 1], scaleY: [1, 1.2, 1] }}
                 className="hover:cursor-pointer col-start-6 row-start-2 bg-slate-600 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center relative"
                 onClick={() => window.open('https://www.youtube.com/@Bang_hen490', '_blank')}
             >
@@ -111,18 +111,34 @@ const Desktop = () => {
                 initial={{ opacity: 0, x: 60 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
-                className="row-span-2 col-start-6 row-start-3 bg-slate-600 rounded-2xl  relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30"
+                className="row-span-2 col-start-6 row-start-3 rounded-2xl relative overflow-hidden border border-white/30"
             >
-                <Image src="/image/Web.jpg" alt="Profile Picture" fill sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw, 60vw" style={{ objectFit: 'cover' }} />
+                <div className="absolute inset-0 bg-black" />
+                <Image src="/image/Web.png" alt="Profile Picture" fill sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw, 60vw" style={{ objectFit: 'cover' }} />
             </m.div>
             <m.div
                 initial={{ opacity: 0, x: 60 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-                className="row-span-2 col-start-7 row-start-3 rounded-2xl relative overflow-hidden border border-white/30"
+                className="hover:cursor-pointer row-span-2 col-start-7 row-start-3 bg-slate-600 rounded-2xl relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 flex flex-col items-center justify-center"
+                onClick={() => router.push('/portofolio')}
             >
-                <div className="absolute inset-0 bg-black" />
-                <Image src="/image/Web.png" alt="Profile Picture" fill sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw, 60vw" style={{ objectFit: 'cover' }} />
+                <span className="absolute top-1 right-1 bg-white/30 backdrop-blur-md rounded-full p-1 flex items-center justify-center">
+                    <ArrowUpRight className='w-4 h-4 text-white' />
+                </span>
+                <div className="flex flex-row items-center justify-center gap-4 mt-8">
+                    {/* Web Icon */}
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 md:w-16 md:h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20" stroke="currentColor" strokeWidth="2" />
+                    </svg>
+                    {/* Mobile Icon */}
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 md:w-14 md:h-14 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <rect x="6" y="2" width="12" height="20" rx="3" stroke="currentColor" strokeWidth="2" />
+                        <circle cx="12" cy="18" r="1" fill="currentColor" />
+                    </svg>
+                </div>
+                <span className="mt-6 mb-8 text-lg md:text-xl font-bold text-white text-center">Portofolio</span>
             </m.div>
             <m.div
                 initial={{ opacity: 0, x: -60 }}
