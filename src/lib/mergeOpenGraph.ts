@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-export const SITEURL = 'https://google.com';
+export const SITEURL = 'https://hendy-nurfrianto.vercel.app';
 
 export const defaultOpenGraph: Metadata['openGraph'] = {
 title: 'Hendy Nurfrianto',
