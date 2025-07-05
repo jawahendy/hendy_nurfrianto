@@ -276,7 +276,7 @@ export const ourPortofolio = {
 				{
 					alt: 'Lucatris RUI',
 					src: '/image/porto/Luc.png',
-					tech: ['React JS', 'Tailwind CSS', 'PostgreSQL', 'Redux', 'Docker', 'express js', 'javascripts', 'chart js', 'mongoDB', 'Redis', 'alibaba cloud'],
+					tech: ['React JS', 'Tailwind CSS', 'PostgreSQL', 'Redux', 'Docker', 'express js', 'javascripts', 'chart js', 'mongoDB', 'Redis', 'alibaba cloud', 'AI'],
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
 					type: 'web',
 					link: 'https://lucatris.com/',
