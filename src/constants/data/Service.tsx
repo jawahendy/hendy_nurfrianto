@@ -314,6 +314,14 @@ export const ourPortofolio = {
 					link: 'https://assesmind.com/login',
 				},
 				{
+					alt: 'Go travel ',
+					src: '/image/porto/bookingplane.png',
+					tech: ['Next.js', 'Tailwind CSS', 'TypeScript', 'Framer Motion'],
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+					type: 'web',
+					link: 'https://booking-airplane.vercel.app/',
+				},
+				{
 					alt: 'QIMS',
 					src: '/image/porto/qims.png',
 					tech: ['Next.js', 'Tailwind CSS', 'TypeScript', 'PostgreSQL', 'Docker', 'express js', 'Tanstack Query', 'alibaba cloud'],
