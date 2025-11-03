@@ -5,6 +5,11 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+/web-bundles
+.vscode
+.github/chatmodes
+.claude
+.bmad-core
 
 # testing
 /coverage
