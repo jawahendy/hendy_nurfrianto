@@ -91,10 +91,10 @@ export default function ExperienceSection() {
           }}
           className="text-center mb-16 sm:mb-20"
         >
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-[rgb(var(--foreground))] mb-3 sm:mb-4 px-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold tracking-tight text-[rgb(var(--foreground))] mb-3 sm:mb-4 px-4">
             Experience
           </h2>
-          <p className="text-lg sm:text-xl text-[rgb(var(--text-secondary))] max-w-2xl mx-auto px-4">
+          <p className="text-sm sm:text-base lg:text-lg text-[rgb(var(--text-secondary))] max-w-2xl mx-auto px-4">
             Partnering with leading companies to build exceptional digital products
           </p>
         </m.div>
@@ -152,15 +152,15 @@ export default function ExperienceSection() {
 
                       {/* Content */}
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-semibold text-[rgb(var(--foreground))] mb-1 group-hover:text-[rgb(var(--primary))] transition-colors duration-300">
+                        <h3 className="text-base sm:text-lg lg:text-xl font-semibold text-[rgb(var(--foreground))] mb-1 group-hover:text-[rgb(var(--primary))] transition-colors duration-300">
                           {exp.company}
                         </h3>
-                        <p className="text-base sm:text-lg font-medium text-[rgb(var(--text-secondary))] mb-2">{exp.role}</p>
+                        <p className="text-sm sm:text-base font-medium text-[rgb(var(--text-secondary))] mb-2">{exp.role}</p>
                         <div className="flex items-center gap-2 text-sm text-[rgb(var(--text-tertiary))] mb-3">
                           <Calendar className="w-4 h-4" />
                           <span>{exp.period}</span>
                         </div>
-                        <p className="text-sm sm:text-base text-[rgb(var(--text-secondary))] leading-relaxed">
+                        <p className="text-xs sm:text-sm text-[rgb(var(--text-secondary))] leading-relaxed">
                           {exp.description}
                         </p>
                       </div>

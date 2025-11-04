@@ -96,11 +96,11 @@ export default function ContactSection() {
 
             {/* Content */}
             <div className="relative" style={{ transform: 'translateZ(40px)' }}>
-              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-semibold tracking-tight mb-4 sm:mb-6 leading-tight px-4">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-semibold tracking-tight mb-4 sm:mb-6 leading-tight px-4">
                 <span className="text-gradient">Let&apos;s create something amazing together</span>
               </h2>
 
-              <p className="text-base sm:text-lg lg:text-xl text-[rgb(var(--text-secondary))] max-w-2xl mx-auto mb-8 sm:mb-10 px-4">
+              <p className="text-sm sm:text-base lg:text-lg text-[rgb(var(--text-secondary))] max-w-2xl mx-auto mb-8 sm:mb-10 px-4">
                 Have a project in mind? Let&apos;s discuss how we can work together to bring your ideas to life.
               </p>
 
@@ -118,7 +118,7 @@ export default function ContactSection() {
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-3 px-12 py-5 bg-[rgb(var(--primary))] text-white rounded-2xl font-semibold text-lg shadow-[0_8px_24px_rgba(var(--primary),0.3)] hover:shadow-[0_16px_48px_rgba(var(--primary),0.4)] transition-all duration-400 ease-apple"
+                className="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-10 sm:py-4 bg-[rgb(var(--primary))] text-white rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base shadow-[0_8px_24px_rgba(var(--primary),0.3)] hover:shadow-[0_16px_48px_rgba(var(--primary),0.4)] transition-all duration-400 ease-apple"
                 style={{ transform: 'translateZ(60px)' }}
               >
                 Get in Touch

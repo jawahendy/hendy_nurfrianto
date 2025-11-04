@@ -50,10 +50,10 @@ export default function ProjectsSection() {
           }}
           className="text-center mb-16 sm:mb-20"
         >
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-[rgb(var(--foreground))] mb-3 sm:mb-4 px-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold tracking-tight text-[rgb(var(--foreground))] mb-3 sm:mb-4 px-4">
             Featured Work
           </h2>
-          <p className="text-lg sm:text-xl text-[rgb(var(--text-secondary))] max-w-2xl mx-auto px-4">
+          <p className="text-sm sm:text-base lg:text-lg text-[rgb(var(--text-secondary))] max-w-2xl mx-auto px-4">
             Selected projects showcasing innovation and technical excellence
           </p>
         </m.div>
@@ -78,7 +78,7 @@ export default function ProjectsSection() {
         >
           <button
             onClick={() => router.push('/portofolio')}
-            className="group inline-flex items-center gap-3 px-10 py-5 bg-transparent border-2 border-[rgb(var(--primary))] text-[rgb(var(--primary))] rounded-2xl font-medium text-lg hover:bg-[rgb(var(--primary))] hover:text-white transition-all duration-300 ease-apple hover:scale-105"
+            className="group inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-transparent border-2 border-[rgb(var(--primary))] text-[rgb(var(--primary))] rounded-xl sm:rounded-2xl font-medium text-sm sm:text-base hover:bg-[rgb(var(--primary))] hover:text-white transition-all duration-300 ease-apple hover:scale-105"
           >
             View All Projects
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
@@ -152,11 +152,11 @@ function ProjectCard({ project, index, isInView }: ProjectCardProps) {
 
         {/* Project Content */}
         <div className={`${isEven ? 'order-2' : 'order-2 lg:order-1'}`} style={{ transform: 'translateZ(20px)' }}>
-          <h3 className="text-3xl lg:text-4xl font-semibold text-[rgb(var(--foreground))] mb-4 leading-tight">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-[rgb(var(--foreground))] mb-3 sm:mb-4 leading-tight">
             {project.alt}
           </h3>
 
-          <p className="text-lg text-[rgb(var(--text-secondary))] leading-relaxed mb-6">
+          <p className="text-sm sm:text-base lg:text-lg text-[rgb(var(--text-secondary))] leading-relaxed mb-4 sm:mb-6">
             {getProjectDescription(project.alt)}
           </p>
 

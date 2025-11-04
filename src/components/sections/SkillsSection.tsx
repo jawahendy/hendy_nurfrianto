@@ -104,10 +104,10 @@ export default function SkillsSection() {
           }}
           className="text-center mb-16 sm:mb-20"
         >
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-[rgb(var(--foreground))] mb-3 sm:mb-4 px-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold tracking-tight text-[rgb(var(--foreground))] mb-3 sm:mb-4 px-4">
             Expertise
           </h2>
-          <p className="text-lg sm:text-xl text-[rgb(var(--text-secondary))] max-w-2xl mx-auto px-4">
+          <p className="text-sm sm:text-base lg:text-lg text-[rgb(var(--text-secondary))] max-w-2xl mx-auto px-4">
             Comprehensive technical skills across the full development stack
           </p>
         </m.div>
@@ -134,7 +134,7 @@ export default function SkillsSection() {
             href="/skill"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-3 px-10 py-5 bg-transparent border-2 border-[rgb(var(--primary))] text-[rgb(var(--primary))] rounded-2xl font-medium text-lg hover:bg-[rgb(var(--primary))] hover:text-white transition-all duration-300 ease-apple hover:scale-105"
+            className="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-transparent border-2 border-[rgb(var(--primary))] text-[rgb(var(--primary))] rounded-xl sm:rounded-2xl font-medium text-sm sm:text-base hover:bg-[rgb(var(--primary))] hover:text-white transition-all duration-300 ease-apple hover:scale-105"
           >
             View All Skills
             <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
@@ -227,7 +227,7 @@ function SkillCard({ category, index, isInView }: SkillCardProps) {
           >
             <Icon className="w-6 h-6" style={{ color: category.color }} />
           </div>
-          <h3 className="text-2xl font-semibold text-[rgb(var(--foreground))]" style={{ transform: 'translateZ(15px)' }}>
+          <h3 className="text-lg sm:text-xl font-semibold text-[rgb(var(--foreground))]" style={{ transform: 'translateZ(15px)' }}>
             {category.title}
           </h3>
         </div>

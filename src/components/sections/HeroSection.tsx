@@ -55,12 +55,12 @@ export default function HeroSection() {
           }}
         >
           {/* Main Heading */}
-          <h1 className="text-6xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.05] text-[rgb(var(--foreground))] mb-6">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-tight leading-[1.05] text-[rgb(var(--foreground))] mb-4 sm:mb-6">
             Hendy Nurfrianto
           </h1>
 
           {/* Tagline */}
-          <p className="text-xl sm:text-2xl lg:text-3xl text-[rgb(var(--text-secondary))] leading-relaxed max-w-3xl mx-auto mb-12">
+          <p className="text-base sm:text-lg lg:text-xl xl:text-2xl text-[rgb(var(--text-secondary))] leading-relaxed max-w-3xl mx-auto mb-8 sm:mb-12">
             Frontend Developer crafting exceptional digital experiences.
           </p>
 
@@ -78,7 +78,7 @@ export default function HeroSection() {
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group relative px-8 py-4 bg-[rgb(var(--primary))] text-white rounded-xl font-medium text-base sm:text-lg shadow-apple-md hover:shadow-apple-lg transition-all duration-300 ease-apple flex items-center gap-2"
+              className="group relative px-6 py-3 sm:px-8 sm:py-4 bg-[rgb(var(--primary))] text-white rounded-xl font-medium text-sm sm:text-base shadow-apple-md hover:shadow-apple-lg transition-all duration-300 ease-apple flex items-center gap-2"
               aria-label="View my work"
             >
               View Work
@@ -97,7 +97,7 @@ export default function HeroSection() {
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group px-8 py-4 bg-transparent border-2 border-[rgba(var(--border-light),0.12)] text-[rgb(var(--foreground))] rounded-xl font-medium text-base sm:text-lg hover:bg-[rgb(var(--surface))] hover:border-[rgb(var(--primary))] transition-all duration-300 ease-apple flex items-center gap-2"
+              className="group px-6 py-3 sm:px-8 sm:py-4 bg-transparent border-2 border-[rgba(var(--border-light),0.12)] text-[rgb(var(--foreground))] rounded-xl font-medium text-sm sm:text-base hover:bg-[rgb(var(--surface))] hover:border-[rgb(var(--primary))] transition-all duration-300 ease-apple flex items-center gap-2"
               aria-label="Get in touch"
             >
               Let&apos;s Talk

@@ -115,11 +115,11 @@ export default function AboutSection() {
                 transform: `translateZ(20px)`,
               }}
             >
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-[rgb(var(--foreground))] mb-3 sm:mb-4 leading-tight">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-[rgb(var(--foreground))] mb-3 sm:mb-4 leading-tight">
                 Building digital experiences for over more than six years
               </h2>
 
-              <p className="text-base sm:text-lg lg:text-xl text-[rgb(var(--text-secondary))] leading-relaxed mb-4 sm:mb-6">
+              <p className="text-sm sm:text-base lg:text-lg text-[rgb(var(--text-secondary))] leading-relaxed mb-3 sm:mb-4">
                 I&apos;ve partnered with companies like{' '}
                 <span className="text-[rgb(var(--foreground))] font-medium">Astra International</span>,{' '}
                 <span className="text-[rgb(var(--foreground))] font-medium">Trakindo</span>, and{' '}
@@ -127,7 +127,7 @@ export default function AboutSection() {
                 millions of users love.
               </p>
 
-              <p className="text-sm sm:text-base lg:text-lg text-[rgb(var(--text-secondary))] leading-relaxed">
+              <p className="text-xs sm:text-sm lg:text-base text-[rgb(var(--text-secondary))] leading-relaxed">
                 I specialize in creating interactive, user-friendly web and mobile applications. Always eager to learn
                 new technologies and push the boundaries of what&apos;s possible.
               </p>
@@ -161,10 +161,10 @@ export default function AboutSection() {
                 className="relative text-center p-3 sm:p-4 lg:p-6 bg-[rgba(var(--primary),0.04)] border border-[rgba(var(--border-light),0.06)] rounded-xl sm:rounded-2xl hover:bg-[rgba(var(--primary),0.08)] hover:border-[rgba(var(--primary),0.2)] transition-all duration-300 group"
               >
                 <Icon className="w-5 h-5 sm:w-6 sm:h-6 mx-auto mb-2 sm:mb-3 text-[rgb(var(--primary))] group-hover:scale-110 transition-transform duration-300" />
-                <div className="text-lg sm:text-xl lg:text-3xl font-semibold text-[rgb(var(--foreground))] mb-1">
+                <div className="text-base sm:text-lg lg:text-2xl font-semibold text-[rgb(var(--foreground))] mb-1">
                   {stat.label}
                 </div>
-                <div className="text-xs sm:text-sm text-[rgb(var(--text-secondary))]">{stat.description}</div>
+                <div className="text-[10px] sm:text-xs lg:text-sm text-[rgb(var(--text-secondary))]">{stat.description}</div>
               </m.div>
             );
           })}
