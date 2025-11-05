@@ -39,9 +39,9 @@ export default function AboutSection() {
 
   const stats = [
     { icon: Calendar, label: '6+ Years', description: 'Experience' },
-    { icon: Award, label: '50+ Projects', description: 'Delivered' },
-    { icon: Globe, label: '8 Companies', description: 'Collaborated' },
-    { icon: Star, label: 'React Specialist', description: 'Expert Level' },
+    { icon: Award, label: '10+ Projects', description: 'Delivered' },
+    { icon: Globe, label: '7+ Companies', description: 'Collaborated' },
+    { icon: Star, label: 'Software Engineer', description: 'Expert Level' },
   ];
 
   return (
@@ -161,7 +161,7 @@ export default function AboutSection() {
                 className="relative text-center p-3 sm:p-4 lg:p-6 bg-[rgba(var(--primary),0.04)] border border-[rgba(var(--border-light),0.06)] rounded-xl sm:rounded-2xl hover:bg-[rgba(var(--primary),0.08)] hover:border-[rgba(var(--primary),0.2)] transition-all duration-300 group"
               >
                 <Icon className="w-5 h-5 sm:w-6 sm:h-6 mx-auto mb-2 sm:mb-3 text-[rgb(var(--primary))] group-hover:scale-110 transition-transform duration-300" />
-                <div className="text-base sm:text-lg lg:text-2xl font-semibold text-[rgb(var(--foreground))] mb-1">
+                <div className="text-base sm:text-lg lg:text-xl font-semibold text-[rgb(var(--foreground))] mb-1">
                   {stat.label}
                 </div>
                 <div className="text-[10px] sm:text-xs lg:text-sm text-[rgb(var(--text-secondary))]">{stat.description}</div>
