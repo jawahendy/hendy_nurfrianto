@@ -40,7 +40,7 @@ export default function AboutSection() {
   const stats = [
     { icon: Calendar, label: '6+ Years', description: 'Experience' },
     { icon: Award, label: '10+ Projects', description: 'Delivered' },
-    { icon: Globe, label: '7+ Companies', description: 'Collaborated' },
+    { icon: Globe, label: '6+ Companies', description: 'Collaborated' },
     { icon: Star, label: 'Software Engineer', description: 'Expert Level' },
   ];
 
@@ -98,7 +98,7 @@ export default function AboutSection() {
               <div className="relative w-full aspect-square rounded-2xl sm:rounded-3xl overflow-hidden shadow-apple-xl">
                 <Image
                   src="/image/PP.jpg"
-                  alt="Hendy Nurfrianto - Frontend Developer"
+                  alt="Hendy Nurfrianto - Software Engineer"
                   fill
                   sizes="(max-width: 768px) 100vw, 400px"
                   className="object-cover transition-transform duration-300 hover:scale-105"

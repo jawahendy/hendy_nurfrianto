@@ -61,7 +61,7 @@ export default function HeroSection() {
 
           {/* Tagline */}
           <p className="text-base sm:text-lg lg:text-xl xl:text-2xl text-[rgb(var(--text-secondary))] leading-relaxed max-w-3xl mx-auto mb-8 sm:mb-12">
-            Frontend Developer crafting exceptional digital experiences.
+            Software Engineer crafting exceptional digital experiences.
           </p>
 
           {/* CTA Buttons */}

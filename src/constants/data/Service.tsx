@@ -62,6 +62,11 @@ export const Skills = {
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
 				},
 				{
+					alt: 'Knex js',
+					src: '/image/skills/knex.png',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
 					alt: 'Next.js',
 					src: '/image/skills/nextjs.png',
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
