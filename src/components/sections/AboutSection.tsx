@@ -4,12 +4,14 @@ import { m } from 'framer-motion';
 import Image from 'next/image';
 import { useState, useRef, MouseEvent } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useSectionTracking } from '@/hooks/useTracking';
 import { Calendar, Award, Globe, Star } from 'lucide-react';
 import FloatingTorus from '@/components/3D/FloatingTorus';
 import FloatingDiamond from '@/components/3D/FloatingDiamond';
 
 export default function AboutSection() {
-  const [ref, isInView] = useScrollReveal({ threshold: 0.2 });
+  const [ref, isInView] = useScrollReveal({ threshold: 0.2 })
+  const sectionRef = useSectionTracking('about')
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
@@ -47,7 +49,10 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      ref={ref as React.RefObject<HTMLElement>}
+      ref={(el) => {
+        (ref as React.MutableRefObject<HTMLElement | null>).current = el;
+        (sectionRef as React.MutableRefObject<HTMLElement | null>).current = el;
+      }}
       className="relative min-h-screen flex items-start justify-center bg-[rgb(var(--surface))] border-t border-[rgba(var(--border-light),0.06)] overflow-y-auto snap-start snap-always"
       aria-label="About Section"
     >

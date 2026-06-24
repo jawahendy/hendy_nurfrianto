@@ -5,9 +5,12 @@ import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { Github, Linkedin, Youtube, Mail } from 'lucide-react';
 import FloatingSphere from '@/components/3D/FloatingSphere';
 import FloatingCube from '@/components/3D/FloatingCube';
+import { useSectionTracking, useClickTracking } from '@/hooks/useTracking';
 
 export default function ContactSection() {
-  const [ref, isInView] = useScrollReveal({ threshold: 0.2 });
+  const [ref, isInView] = useScrollReveal({ threshold: 0.2 })
+  const sectionRef = useSectionTracking('contact')
+  const { trackClick } = useClickTracking()
 
   const socialLinks = [
     {
@@ -39,7 +42,10 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      ref={ref as React.RefObject<HTMLElement>}
+      ref={(el) => {
+        (ref as React.MutableRefObject<HTMLElement | null>).current = el;
+        (sectionRef as React.MutableRefObject<HTMLElement | null>).current = el;
+      }}
       className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-[rgb(var(--background))] to-[rgba(var(--primary),0.03)] overflow-hidden snap-start snap-always"
       aria-label="Contact Section"
     >
@@ -109,6 +115,7 @@ export default function ContactSection() {
                 href="https://drive.google.com/drive/folders/1Y2T8prWNpxZ9nxEz6mHjsLIhL_2P1Feg?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackClick('cta_clicked', { button: 'Get in Touch', section: 'contact' })}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{
@@ -144,6 +151,7 @@ export default function ContactSection() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => trackClick('social_link_clicked', { platform: social.label, section: 'contact' })}
                       initial={{ opacity: 0, y: 20 }}
                       animate={isInView ? { opacity: 1, y: 0 } : {}}
                       transition={{

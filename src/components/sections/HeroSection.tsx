@@ -4,25 +4,32 @@ import { m } from 'framer-motion';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import FloatingSphere from '../3D/FloatingSphere';
 import FloatingCube from '../3D/FloatingCube';
+import { useSectionTracking, useClickTracking } from '@/hooks/useTracking';
 
 export default function HeroSection() {
+  const sectionRef = useSectionTracking('hero')
+  const { trackClick } = useClickTracking()
+
   const scrollToContent = () => {
     const aboutSection = document.getElementById('about');
     aboutSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleViewWork = () => {
+    trackClick('cta_clicked', { button: 'View Work', section: 'hero' })
     const projectsSection = document.getElementById('projects');
     projectsSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleLetsTalk = () => {
+    trackClick('cta_clicked', { button: "Let's Talk", section: 'hero' })
     const contactSection = document.getElementById('contact');
     contactSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <section
+      ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--background))] snap-start snap-always"
       aria-label="Hero Section"
     >

@@ -3,13 +3,15 @@
 import { m } from 'framer-motion';
 import Image from 'next/image';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useSectionTracking } from '@/hooks/useTracking';
 import { Calendar, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
 import FloatingTorus from '@/components/3D/FloatingTorus';
 import FloatingPyramid from '@/components/3D/FloatingPyramid';
 
 export default function ExperienceSection() {
-  const [ref, isInView] = useScrollReveal({ threshold: 0.15 });
+  const [ref, isInView] = useScrollReveal({ threshold: 0.15 })
+  const sectionRef = useSectionTracking('experience')
   const [showAll, setShowAll] = useState(false);
 
   const experiences = [
@@ -60,7 +62,10 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      ref={ref as React.RefObject<HTMLElement>}
+      ref={(el) => {
+        (ref as React.MutableRefObject<HTMLElement | null>).current = el;
+        (sectionRef as React.MutableRefObject<HTMLElement | null>).current = el;
+      }}
       className="relative min-h-screen flex items-center justify-center bg-[rgb(var(--background))] overflow-hidden snap-start snap-always"
       aria-label="Experience Section"
     >

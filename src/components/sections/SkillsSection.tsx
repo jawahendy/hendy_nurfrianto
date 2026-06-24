@@ -2,13 +2,15 @@
 
 import { m } from 'framer-motion';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useSectionTracking } from '@/hooks/useTracking';
 import { useState, useRef, MouseEvent } from 'react';
 import { Code, Smartphone, Server, Cloud, Database, Wrench } from 'lucide-react';
 import FloatingDiamond from '@/components/3D/FloatingDiamond';
 import FloatingCube from '@/components/3D/FloatingCube';
 
 export default function SkillsSection() {
-  const [ref, isInView] = useScrollReveal({ threshold: 0.1 });
+  const [ref, isInView] = useScrollReveal({ threshold: 0.1 })
+  const sectionRef = useSectionTracking('skills')
 
   const skillCategories = [
     {
@@ -58,7 +60,10 @@ export default function SkillsSection() {
   return (
     <section
       id="skills"
-      ref={ref as React.RefObject<HTMLElement>}
+      ref={(el) => {
+        (ref as React.MutableRefObject<HTMLElement | null>).current = el;
+        (sectionRef as React.MutableRefObject<HTMLElement | null>).current = el;
+      }}
       className="relative min-h-screen flex items-center justify-center bg-[rgb(var(--surface))] border-t border-[rgba(var(--border-light),0.06)] overflow-hidden snap-start snap-always"
       aria-label="Skills Section"
     >

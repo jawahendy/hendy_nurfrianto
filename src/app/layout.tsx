@@ -3,6 +3,8 @@ import "./globals.css";
 import { inter, montserrat, poppins } from "@/constants/fonts";
 import MotionLazy from "@/components/MotionLazy";
 import { mergeOpenGraph } from "@/lib/mergeOpenGraph";
+import { PostHogProvider } from "@/providers/PostHogProvider";
+import { Suspense } from "react";
 
 
 export const metadata: Metadata = {
@@ -30,7 +32,11 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} ${inter.variable} ${poppins.variable} antialiased font-montserrat`}
       >
-        <MotionLazy>{ children }</MotionLazy>
+        <Suspense>
+          <PostHogProvider>
+            <MotionLazy>{ children }</MotionLazy>
+          </PostHogProvider>
+        </Suspense>
       </body>
     </html>
   );

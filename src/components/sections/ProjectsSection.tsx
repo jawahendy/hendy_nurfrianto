@@ -3,6 +3,7 @@
 import { m } from 'framer-motion';
 import Image from 'next/image';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useSectionTracking, useClickTracking } from '@/hooks/useTracking';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { ourPortofolio } from '@/constants/data/Service';
@@ -10,7 +11,9 @@ import FloatingSphere from '@/components/3D/FloatingSphere';
 import FloatingPyramid from '@/components/3D/FloatingPyramid';
 
 export default function ProjectsSection() {
-  const [ref, isInView] = useScrollReveal({ threshold: 0.1 });
+  const [ref, isInView] = useScrollReveal({ threshold: 0.1 })
+  const sectionRef = useSectionTracking('projects')
+  const { trackClick } = useClickTracking()
   const router = useRouter();
 
   // Get featured projects (first 3)
@@ -19,7 +22,10 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      ref={ref as React.RefObject<HTMLElement>}
+      ref={(el) => {
+        (ref as React.MutableRefObject<HTMLElement | null>).current = el;
+        (sectionRef as React.MutableRefObject<HTMLElement | null>).current = el;
+      }}
       className="relative min-h-screen flex items-center justify-center bg-[rgb(var(--background))] overflow-hidden snap-start snap-always"
       aria-label="Featured Projects Section"
     >
@@ -77,7 +83,10 @@ export default function ProjectsSection() {
           className="text-center mt-20"
         >
           <button
-            onClick={() => router.push('/portofolio')}
+            onClick={() => {
+              trackClick('cta_clicked', { button: 'View All Projects', section: 'projects' })
+              router.push('/portofolio')
+            }}
             className="group inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-transparent border-2 border-[rgb(var(--primary))] text-[rgb(var(--primary))] rounded-xl sm:rounded-2xl font-medium text-sm sm:text-base hover:bg-[rgb(var(--primary))] hover:text-white transition-all duration-300 ease-apple hover:scale-105"
           >
             View All Projects
