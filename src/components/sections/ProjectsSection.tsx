@@ -111,6 +111,7 @@ interface ProjectCardProps {
 }
 
 function ProjectCard({ project, index, isInView }: ProjectCardProps) {
+  const { trackClick } = useClickTracking()
   const isEven = index % 2 === 0;
 
   return (
@@ -187,6 +188,11 @@ function ProjectCard({ project, index, isInView }: ProjectCardProps) {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackClick('project_clicked', {
+                project_name: project.alt,
+                project_type: project.type,
+                page: 'home',
+              })}
               className="group/btn inline-flex items-center gap-2 px-6 py-3 bg-[rgb(var(--primary))] text-white rounded-xl font-medium hover:shadow-apple-md transition-all duration-300 hover:-translate-y-1"
             >
               View Project

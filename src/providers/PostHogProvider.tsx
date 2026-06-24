@@ -44,10 +44,20 @@ function PageViewTracker() {
     pageStartTime.current = Date.now()
     previousUrl.current = currentUrl
 
+    const pageNameMap: Record<string, string> = {
+      '/': 'Home',
+      '/portofolio': 'Portfolio',
+      '/skill': 'Skills',
+    }
+
     posthog.capture('$pageview', {
       $current_url: currentUrl,
       page_path: pathname,
       page_title: document.title,
+      page_name: pageNameMap[pathname] ?? pathname,
+      device_type: window.innerWidth < 768 ? 'mobile' : window.innerWidth < 1024 ? 'tablet' : 'desktop',
+      screen_width: window.innerWidth,
+      screen_height: window.innerHeight,
     })
   }, [pathname, searchParams])
 

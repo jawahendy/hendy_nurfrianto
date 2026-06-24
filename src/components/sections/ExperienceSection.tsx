@@ -3,7 +3,7 @@
 import { m } from 'framer-motion';
 import Image from 'next/image';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { useSectionTracking } from '@/hooks/useTracking';
+import { useSectionTracking, useClickTracking } from '@/hooks/useTracking';
 import { Calendar, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
 import FloatingTorus from '@/components/3D/FloatingTorus';
@@ -12,6 +12,7 @@ import FloatingPyramid from '@/components/3D/FloatingPyramid';
 export default function ExperienceSection() {
   const [ref, isInView] = useScrollReveal({ threshold: 0.15 })
   const sectionRef = useSectionTracking('experience')
+  const { trackClick } = useClickTracking()
   const [showAll, setShowAll] = useState(false);
 
   const experiences = [
@@ -189,7 +190,11 @@ export default function ExperienceSection() {
               className="flex justify-center mt-12 md:ml-24"
             >
               <button
-                onClick={() => setShowAll(!showAll)}
+                onClick={() => {
+                  const next = !showAll
+                  setShowAll(next)
+                  trackClick('experience_expanded', { expanded: next })
+                }}
                 className="group inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-[rgb(var(--primary))] text-[rgb(var(--primary))] rounded-2xl font-medium text-base hover:bg-[rgb(var(--primary))] hover:text-white transition-all duration-300 ease-apple hover:scale-105 shadow-apple-sm hover:shadow-apple-md"
               >
                 {showAll ? (

@@ -11,10 +11,12 @@ import FloatingTorus from '@/components/3D/FloatingTorus';
 import FloatingPyramid from '@/components/3D/FloatingPyramid';
 import FloatingDiamond from '@/components/3D/FloatingDiamond';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useClickTracking } from '@/hooks/useTracking';
 
 export default function SkillsPage() {
   const router = useRouter();
   const [ref, isInView] = useScrollReveal({ threshold: 0.05 });
+  const { trackClick } = useClickTracking();
 
   const allSkills = Skills1.list[0].slides.concat(Skills2.list.flatMap((client) => client.slides));
 
@@ -103,7 +105,10 @@ export default function SkillsPage() {
               Check out my portfolio to see real projects built with these technologies.
             </p>
             <m.button
-              onClick={() => router.push('/portofolio')}
+              onClick={() => {
+                trackClick('cta_clicked', { button: 'View Portfolio', section: 'skills_footer' })
+                router.push('/portofolio')
+              }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="inline-flex items-center gap-3 px-10 py-5 bg-[rgb(var(--primary))] text-white rounded-2xl font-semibold text-lg shadow-[0_8px_24px_rgba(var(--primary),0.3)] hover:shadow-[0_16px_48px_rgba(var(--primary),0.4)] transition-all duration-300"

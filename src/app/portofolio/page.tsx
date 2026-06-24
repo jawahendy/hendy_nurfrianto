@@ -12,12 +12,14 @@ import FloatingTorus from '@/components/3D/FloatingTorus';
 import FloatingPyramid from '@/components/3D/FloatingPyramid';
 import FloatingDiamond from '@/components/3D/FloatingDiamond';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useClickTracking } from '@/hooks/useTracking';
 
 export default function PortfolioPage() {
   const router = useRouter();
   const [ref, isInView] = useScrollReveal({ threshold: 0.05 });
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [showMobileFilter, setShowMobileFilter] = useState(false);
+  const { trackClick } = useClickTracking();
 
   const allProjects = ourPortofolio.list[0].slides;
 
@@ -90,7 +92,10 @@ export default function PortfolioPage() {
               {categories.map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => setSelectedCategory(cat)}
+                  onClick={() => {
+                    setSelectedCategory(cat)
+                    trackClick('portfolio_filter_used', { filter: cat, page: 'portfolio' })
+                  }}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                     selectedCategory === cat
                       ? 'bg-[rgb(var(--primary))] text-white shadow-lg'
@@ -133,6 +138,7 @@ export default function PortfolioPage() {
                     onClick={() => {
                       setSelectedCategory(cat);
                       setShowMobileFilter(false);
+                      trackClick('portfolio_filter_used', { filter: cat, page: 'portfolio' })
                     }}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                       selectedCategory === cat
@@ -211,7 +217,10 @@ export default function PortfolioPage() {
               Have a project in mind? Let&apos;s create something amazing together.
             </p>
             <m.button
-              onClick={() => router.push('/#contact')}
+              onClick={() => {
+                trackClick('cta_clicked', { button: 'Get in Touch', section: 'portfolio_footer' })
+                router.push('/#contact')
+              }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-[rgb(var(--primary))] text-white rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base lg:text-lg shadow-[0_8px_24px_rgba(var(--primary),0.3)] hover:shadow-[0_16px_48px_rgba(var(--primary),0.4)] transition-all duration-300"
@@ -238,8 +247,15 @@ interface ProjectCardProps {
 }
 
 function ProjectCard({ project, index, isInView }: ProjectCardProps) {
+  const { trackClick } = useClickTracking()
+
   const handleCardClick = () => {
     if (project.link) {
+      trackClick('project_clicked', {
+        project_name: project.alt,
+        project_type: project.type,
+        page: 'portfolio',
+      })
       window.open(project.link, '_blank', 'noopener,noreferrer');
     }
   };
