@@ -1,176 +1,142 @@
 'use client';
 
-import { m } from 'framer-motion';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { Skills as Skills1, Skills2 } from '@/constants/data/Service';
-import { ArrowLeft } from 'lucide-react';
-import FloatingSphere from '@/components/3D/FloatingSphere';
-import FloatingCube from '@/components/3D/FloatingCube';
-import FloatingTorus from '@/components/3D/FloatingTorus';
-import FloatingPyramid from '@/components/3D/FloatingPyramid';
-import FloatingDiamond from '@/components/3D/FloatingDiamond';
-import { useScrollReveal } from '@/hooks/useScrollReveal';
+import SubHeader from '@/components/Journey/SubHeader';
+import WorldBackdrop from '@/components/Journey/WorldBackdrop';
 import { useClickTracking } from '@/hooks/useTracking';
 
-export default function SkillsPage() {
-  const router = useRouter();
-  const [ref, isInView] = useScrollReveal({ threshold: 0.05 });
-  const { trackClick } = useClickTracking();
+type Group = 'Frontend' | 'Mobile' | 'AI' | 'State & testing' | 'Tools' | 'Backend & data' | 'Cloud & DevOps' | 'Analytics & monitoring' | 'Other';
 
+// Display name and CV category per icon file, so the inventory reads like the CV
+const CATALOG: Record<string, { name: string; group: Group }> = {
+  'react.png': { name: 'React & React Native', group: 'Frontend' },
+  'nextjs.png': { name: 'Next.js', group: 'Frontend' },
+  'ts.png': { name: 'TypeScript', group: 'Frontend' },
+  'js.png': { name: 'JavaScript', group: 'Frontend' },
+  'Tailwind.png': { name: 'Tailwind CSS', group: 'Frontend' },
+  'css.png': { name: 'CSS', group: 'Frontend' },
+  'chart.png': { name: 'Chart.js', group: 'Frontend' },
+  'flutter.png': { name: 'Flutter', group: 'Mobile' },
+  'Dart.png': { name: 'Dart', group: 'Mobile' },
+  'Ios.png': { name: 'iOS', group: 'Mobile' },
+  'ioss.png': { name: 'SwiftUI', group: 'Mobile' },
+  'Ignite.png': { name: 'Ignite', group: 'Mobile' },
+  'swift.svg': { name: 'Swift', group: 'Mobile' },
+  'claude.svg': { name: 'Claude Code', group: 'AI' },
+  'mcp.svg': { name: 'MCP with Claude', group: 'AI' },
+  'vercel.svg': { name: 'Vercel AI SDK', group: 'AI' },
+  'copilot.svg': { name: 'GitHub Copilot', group: 'AI' },
+  'cursor.svg': { name: 'Cursor', group: 'AI' },
+  'rdx.png': { name: 'Redux', group: 'State & testing' },
+  'mobx.png': { name: 'MobX', group: 'State & testing' },
+  'jest.svg': { name: 'Jest', group: 'State & testing' },
+  'testinglibrary.svg': { name: 'React Testing Library', group: 'State & testing' },
+  'git.png': { name: 'Git', group: 'Tools' },
+  'github.svg': { name: 'GitHub', group: 'Tools' },
+  'gitlab.png': { name: 'GitLab', group: 'Tools' },
+  'jira.png': { name: 'Jira', group: 'Tools' },
+  'figma.svg': { name: 'Figma', group: 'Tools' },
+  'npm.png': { name: 'npm', group: 'Tools' },
+  'postman.png': { name: 'Postman', group: 'Tools' },
+  'express.svg': { name: 'Express.js', group: 'Backend & data' },
+  'node.png': { name: 'Node.js', group: 'Backend & data' },
+  'knex.png': { name: 'Knex.js', group: 'Backend & data' },
+  'go.png': { name: 'Go', group: 'Backend & data' },
+  'rest.png': { name: 'REST API', group: 'Backend & data' },
+  'Graphql.png': { name: 'GraphQL', group: 'Backend & data' },
+  'post.png': { name: 'PostgreSQL', group: 'Backend & data' },
+  'mys.png': { name: 'MySQL', group: 'Backend & data' },
+  'mongo.png': { name: 'MongoDB', group: 'Backend & data' },
+  'Redis.png': { name: 'Redis', group: 'Backend & data' },
+  'firebase.png': { name: 'Firebase', group: 'Backend & data' },
+  'aws.png': { name: 'AWS', group: 'Cloud & DevOps' },
+  'gcp.png': { name: 'Google Cloud', group: 'Cloud & DevOps' },
+  'azure.png': { name: 'Azure', group: 'Cloud & DevOps' },
+  'ali.png': { name: 'Alibaba Cloud', group: 'Cloud & DevOps' },
+  'cloude.png': { name: 'Cloudflare', group: 'Cloud & DevOps' },
+  'docker.png': { name: 'Docker', group: 'Cloud & DevOps' },
+  'hero.png': { name: 'Heroku', group: 'Cloud & DevOps' },
+  'posthog.svg': { name: 'PostHog', group: 'Analytics & monitoring' },
+  'grafana.png': { name: 'Grafana', group: 'Analytics & monitoring' },
+  'dynatrace.png': { name: 'Dynatrace', group: 'Analytics & monitoring' },
+  'unity.png': { name: 'Unity', group: 'Other' },
+  'Charp.png': { name: 'C#', group: 'Other' },
+  'blender.svg': { name: 'Blender', group: 'Other' },
+  'shopify.svg': { name: 'Shopify', group: 'Other' },
+};
+
+const ORDER: Group[] = [
+  'Frontend', 'Mobile', 'AI', 'State & testing', 'Tools',
+  'Backend & data', 'Cloud & DevOps', 'Analytics & monitoring', 'Other',
+];
+
+export default function SkillsPage() {
+  const { trackClick } = useClickTracking();
   const allSkills = Skills1.list[0].slides.concat(Skills2.list.flatMap((client) => client.slides));
 
+  const groups = ORDER.map((group) => ({
+    group,
+    items: allSkills
+      .map((skill) => {
+        const file = skill.src.split('/').pop() ?? '';
+        const entry = CATALOG[file];
+        return entry ? { ...entry, src: skill.src } : null;
+      })
+      .filter((item): item is { name: string; group: Group; src: string } => item?.group === group),
+  })).filter(({ items }) => items.length > 0);
+
+  const total = groups.reduce((sum, g) => sum + g.items.length, 0);
+
   return (
-    <main className="relative min-h-screen bg-[rgb(var(--background))] overflow-hidden">
-      {/* 3D Background Grid */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(0, 113, 227, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 113, 227, 0.5) 1px, transparent 1px)',
-          backgroundSize: '50px 50px',
-          transform: 'perspective(1000px) rotateX(60deg)',
-          transformOrigin: 'top',
-        }}
-      />
+    <div className="j-page">
+      <WorldBackdrop stage={9} />
+      <SubHeader current="skills" />
+      <main className="j-page-main">
+        <div className="j-page-head j-glass">
+          <h1 className="j-page-title">Skills inventory</h1>
+          <p className="j-page-lede">
+            {total} tools on the shelf, grouped the way they show up in my work: frontend first, then mobile,
+            AI tooling, backend, cloud and the rest.
+          </p>
+        </div>
 
-      {/* 3D Floating Elements */}
-      <FloatingSphere className="left-[-100px] top-[10%] scale-75 opacity-60" />
-      <FloatingCube className="right-[-80px] top-[30%] scale-75 opacity-60" />
-      <FloatingTorus className="right-[10%] bottom-[20%] scale-75 opacity-50" />
-      <FloatingPyramid className="left-[5%] bottom-[15%] scale-75 opacity-50" />
-      <FloatingDiamond className="right-[15%] top-[60%] scale-50 opacity-40" />
-
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12">
-        {/* Header with Back Button */}
-        <m.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.6,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-          className="flex items-center gap-6 mb-12"
-        >
-          {/* Back Button */}
-          <m.button
-            onClick={() => router.push('/')}
-            whileHover={{ scale: 1.05, x: -4 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-2 px-5 py-3 bg-[rgb(var(--surface))] border border-[rgba(var(--border-light),0.12)] rounded-xl text-[rgb(var(--foreground))] hover:bg-[rgba(var(--primary),0.06)] hover:border-[rgb(var(--primary))] transition-all duration-300 shadow-apple-sm hover:shadow-apple-md"
-            aria-label="Back to home"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            <span className="font-medium">Back</span>
-          </m.button>
-
-          {/* Title */}
-          <div className="flex-1">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-[rgb(var(--foreground))]">
-              All Skills
-            </h1>
-            <p className="text-lg sm:text-xl text-[rgb(var(--text-secondary))] mt-2">
-              Technologies and tools I work with
-            </p>
-          </div>
-        </m.div>
-
-        {/* Skills Grid */}
-        <div
-          ref={ref as React.RefObject<HTMLDivElement>}
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6"
-        >
-          {allSkills.map((skill, index) => (
-            <SkillCard key={`${skill.alt}-${index}`} skill={skill} index={index} isInView={isInView} />
+        <div className="j-inventory">
+          {groups.map(({ group, items }) => (
+            <section key={group} className="j-bay j-glass" aria-labelledby={`bay-${group}`}>
+              <header className="j-bay-head">
+                <h2 id={`bay-${group}`}>{group}</h2>
+                <span className="j-mono">{items.length}</span>
+              </header>
+              <ul className="j-bay-list">
+                {items.map((item) => (
+                  <li key={item.name}>
+                    <span className="j-bay-icon">
+                      <Image src={item.src} alt="" width={28} height={28} unoptimized />
+                    </span>
+                    {item.name}
+                  </li>
+                ))}
+              </ul>
+            </section>
           ))}
         </div>
 
-        {/* Footer CTA */}
-        <m.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{
-            duration: 0.8,
-            delay: 0.4,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-          className="mt-20 text-center"
-        >
-          <div className="glass rounded-[32px] p-12 lg:p-16 border border-[rgba(var(--border-light),0.06)] shadow-apple-lg">
-            <h2 className="text-3xl sm:text-4xl font-semibold text-[rgb(var(--foreground))] mb-4">
-              Want to see these skills in action?
-            </h2>
-            <p className="text-lg text-[rgb(var(--text-secondary))] mb-8 max-w-2xl mx-auto">
-              Check out my portfolio to see real projects built with these technologies.
-            </p>
-            <m.button
-              onClick={() => {
-                trackClick('cta_clicked', { button: 'View Portfolio', section: 'skills_footer' })
-                router.push('/portofolio')
-              }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-3 px-10 py-5 bg-[rgb(var(--primary))] text-white rounded-2xl font-semibold text-lg shadow-[0_8px_24px_rgba(var(--primary),0.3)] hover:shadow-[0_16px_48px_rgba(var(--primary),0.4)] transition-all duration-300"
-            >
-              View Portfolio
-            </m.button>
-          </div>
-        </m.div>
-      </div>
-    </main>
-  );
-}
-
-interface SkillCardProps {
-  skill: {
-    alt: string;
-    src: string;
-    style?: React.CSSProperties;
-  };
-  index: number;
-  isInView: boolean;
-}
-
-function SkillCard({ skill, index, isInView }: SkillCardProps) {
-  return (
-    <m.div
-      initial={{ opacity: 0, y: 40, scale: 0.8 }}
-      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-      transition={{
-        duration: 0.6,
-        delay: index * 0.03,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      className="group preserve-3d perspective-1000"
-    >
-      <div className="relative bg-[rgb(var(--surface))] rounded-2xl p-6 shadow-apple-sm hover:shadow-apple-lg transition-all duration-500 hover:-translate-y-2 border border-[rgba(var(--border-light),0.06)] flex flex-col items-center justify-center h-[180px]">
-        {/* Hover Gradient Overlay */}
-        <div
-          className="absolute inset-[-4px] rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-400 -z-10"
-          style={{
-            background: 'linear-gradient(135deg, rgb(var(--primary)), #764ba2)',
-          }}
-        />
-
-        {/* Skill Icon */}
-        <div className="relative w-16 h-16 sm:w-20 sm:h-20 mb-3 flex items-center justify-center flex-shrink-0">
-          <Image
-            src={skill.src}
-            alt={skill.alt}
-            width={80}
-            height={80}
-            style={skill.style}
-            className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-110 filter grayscale-[20%] group-hover:grayscale-0"
-            unoptimized={true}
-          />
-        </div>
-
-        {/* Skill Name */}
-        <h3 className="text-center text-xs sm:text-sm font-medium text-[rgb(var(--foreground))] group-hover:text-[rgb(var(--primary))] transition-colors duration-300 break-words line-clamp-2">
-          {skill.alt}
-        </h3>
-      </div>
-    </m.div>
+        <aside className="j-page-cta j-glass">
+          <p>
+            <strong>See them at work.</strong> Every project in the portfolio lists the stack it shipped on.
+          </p>
+          <Link
+            href="/portofolio"
+            className="j-btn j-btn-primary"
+            onClick={() => trackClick('cta_clicked', { button: 'View Portfolio', section: 'skills_footer' })}
+          >
+            View portfolio <ArrowRight aria-hidden className="size-4" />
+          </Link>
+        </aside>
+      </main>
+    </div>
   );
 }

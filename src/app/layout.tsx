@@ -1,25 +1,29 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { inter, montserrat, poppins } from "@/constants/fonts";
+import { geistMono, geistSans } from "@/constants/fonts";
 import MotionLazy from "@/components/MotionLazy";
 import { mergeOpenGraph } from "@/lib/mergeOpenGraph";
 import { PostHogProvider } from "@/providers/PostHogProvider";
 import { Suspense } from "react";
 
+const description =
+  'Hendy Nurfrianto, Senior Software Engineer in Jakarta. React, Next.js, TypeScript and React Native, with fullstack Node.js, PostgreSQL and Firebase. Walk through the career journey, skills and shipped projects.'
 
 export const metadata: Metadata = {
-  title: 'Hendy Nurfrianto',
-  description:
-    'Welcome to my portfolio! I am Hendy Nurfrianto, a passionate frontend developer with expertise in creating dynamic and responsive web applications and mobile app. Explore my skills to see how I can help bring your ideas to life.',
+  title: 'Hendy Nurfrianto · Senior Software Engineer',
+  description,
   icons: {
     icon: '/icon',
     apple: '/apple-icon',
   },
   openGraph: mergeOpenGraph({
-    title: 'Hendy Nurfrianto',
-    description:
-      'Welcome to my portfolio! I am Hendy Nurfrianto, a passionate frontend developer with expertise in creating dynamic and responsive web applications and mobile app. Explore my skills to see how I can help bring your ideas to life.',
+    title: 'Hendy Nurfrianto · Senior Software Engineer',
+    description,
   }),
+};
+
+export const viewport: Viewport = {
+  themeColor: '#e0e7f5',
 };
 
 export default function RootLayout({
@@ -29,9 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${montserrat.variable} ${inter.variable} ${poppins.variable} antialiased font-montserrat`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Suspense>
           <PostHogProvider>
             <MotionLazy>{ children }</MotionLazy>
