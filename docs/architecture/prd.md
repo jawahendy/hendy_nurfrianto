@@ -2,8 +2,8 @@
 
 ## Hendy Nurfrianto Portfolio Website
 
-**Version:** 1.0
-**Date:** 2025-11-03
+**Version:** 2.0 (3D career journey redesign)
+**Date:** 2026-10-19 (v1.0: 2025-11-03)
 **Status:** In Production
 **Author:** Hendy Nurfrianto
 **Project Type:** Personal Portfolio / Online CV
@@ -12,16 +12,16 @@
 
 ## Executive Summary
 
-The Hendy Nurfrianto Portfolio Website is a modern, interactive personal portfolio and online CV designed to showcase professional skills, experience, and projects. Built with cutting-edge web technologies including Next.js 14, React 18, TypeScript, and Tailwind CSS, the site provides an engaging user experience with smooth animations, glassmorphic design elements, and responsive layouts optimized for all devices.
+The Hendy Nurfrianto Portfolio Website is a personal portfolio and online CV. Version 2.0 turns the home page into a scroll-driven career journey. A real-time 3D isometric town (React Three Fiber) renders behind real DOM content, and a cartoon walker moves from stop to stop as the visitor scrolls. Each stop is one stage of the CV, and the text on each card matches the CV word for word. The Skills and Portfolio pages sit over the same town, blurred, so the whole site reads as one world. Product truth lives in `PRODUCT.md` and the visual system in `DESIGN.md`.
 
 ### Key Highlights
 
-- **Modern Tech Stack**: Next.js 14 with App Router, React 18, TypeScript 5
-- **Responsive Design**: Mobile-first approach with desktop and tablet optimization
-- **Interactive Animations**: Framer Motion for smooth page transitions and component animations
-- **Glassmorphic UI**: Modern design with backdrop blur and transparency effects
-- **Performance Optimized**: Server-side rendering, code splitting, and lazy loading
-- **Accessibility First**: ARIA labels, semantic HTML, keyboard navigation
+- **3D career journey**: 12 stops (Start → Gunadarma → Adicipta → Celerates → Gordi → Pama Persada → Mitra Solusi → Astra → Radiant → Skills → Projects → Contact). Every work stop is an office building with themed props, with two-way traffic on the road
+- **CV-verbatim content**: all career facts come from the CV PDF; no invented metrics or testimonials
+- **Modern Tech Stack**: Next.js 14 App Router, React 18, TypeScript 5, three.js + React Three Fiber
+- **Responsive Design**: right-hand cards on desktop; a foldable bottom sheet and pager stepper on mobile
+- **Progressive enhancement**: real DOM text, a no-WebGL still fallback, `prefers-reduced-motion` snapping
+- **Analytics**: PostHog section, CTA, stepper and panel events
 
 ---
 
@@ -178,115 +178,73 @@ To create an outstanding personal portfolio that showcases technical expertise a
 
 ### Core Features
 
-#### 1. Home Page (`/`)
+#### 1. Home Page: Career Journey (`/`)
 
-**Status:** ✅ Implemented
+**Status:** ✅ Implemented (v2.0)
 
 **Description:**
-Interactive landing page with profile information, brief introduction, and navigation to other sections.
+A scroll-driven 3D journey through the CV. Each 100svh scroll section is one stop. The walker walks the sidewalk to the next stop and steps into its yard, and the stop's card shows that stage.
 
 **Key Elements:**
-- Profile picture/avatar
-- Name and title/role
-- Brief introduction/tagline
-- Navigation to Skills and Portfolio pages
-- Responsive layout (Desktop & Mobile variants)
-- Background image with overlay
-- Glassmorphic design elements
-- Smooth animations on load
+- **Hero (Start):** name, role, stack line, and the CV summary. Actions: "Walk the journey" and "Portfolio Drive". On mobile the summary is clamped with a "Read full summary" toggle
+- **Stage cards:**
+  - title, Role/Period rows (with a "Current" badge), CV bullets and stack chips;
+  - on desktop, no card scrolls at 1280×720 and above.
+- **Skills card:** the CV skill groups, plus a link to `/skill`
+- **Projects card:** three featured projects, plus links to `/portofolio` and the Drive archive
+- **Contact card:** email, LinkedIn, GitHub and the Drive archive
+- **Top bar:** one proof chip ("Since 2019") and the nav (Skills, Portfolio, Contact)
+- **Stepper:** 12 dated stops on desktop (click to travel); a prev/next pager on mobile
+- **Mobile panel fold:** a chevron toggle collapses the card to its title. The choice is shared across stops
+- **3D world:**
+  - landmarks per employer and campus;
+  - yards with bay paint;
+  - two-way traffic: cars, box trucks, container trucks;
+  - map pins with stop labels.
 
 **Technical Implementation:**
-- Server Component (default)
-- Responsive design with separate Desktop/Mobile components
-- Framer Motion animations
-- Tailwind CSS styling
-- Background image optimization
+- `components/Journey` (DOM) plus `components/Journey/World` (R3F scene, dynamic import, client only)
+- Scroll progress is stored in `store.ts` and read every frame. React re-renders only on stop change
+- Fallbacks:
+  - no WebGL: pre-rendered stills per stop;
+  - reduced motion: snap to stops, parked traffic;
+  - low-power devices: no shadows, capped DPR.
 
 **User Experience:**
-- First impression optimization
-- Fast loading time
-- Clear call-to-action buttons
-- Smooth transitions
+- One continuous story instead of stacked sections
+- The content is always readable, with the 3D as an enhancement
+- Contact is never more than one action away (top-bar Contact)
 
 ---
 
 #### 2. Skills Page (`/skill`)
 
-**Status:** ✅ Implemented
+**Status:** ✅ Implemented (v2.0)
 
 **Description:**
-Comprehensive display of technical skills organized in an interactive grid layout.
+A "Skills inventory": 54 tools grouped into shelf bays, over the blurred town.
 
-**Key Elements:**
-- Skills grid with icons and labels
-- Categorized skills (Frontend, Backend, Tools, Cloud, etc.)
-- Animated skill card appearance
-- Back navigation button
-- Search/filter functionality (future)
-
-**Skill Categories:**
-- **Frontend**: React, Next.js, TypeScript, HTML, JavaScript
-- **Mobile**: Flutter, React Native, Android, iOS
-- **Backend**: Node.js, Go, GraphQL, REST API
-- **Databases**: MongoDB, MySQL, Redis, PostgreSQL
-- **DevOps**: Docker, Git, GitLab, CI/CD
-- **Cloud**: AWS, GCP, Azure, Firebase, Alibaba Cloud
-- **Tools**: Jira, Postman, npm, Unity
-- **Monitoring**: Grafana, Dynatrace, CloudWatch
+**Skill Groups:**
+Frontend, Mobile, AI (Claude Code, MCP with Claude, Vercel AI SDK, GitHub Copilot, Cursor), State & testing, Tools, Backend & data, Cloud & DevOps, Analytics & monitoring, Other.
 
 **Technical Implementation:**
-- Client Component ('use client')
-- Framer Motion for staggered animations
-- Random directional entry animations
-- Next.js Image optimization
-- Responsive grid (2-6 columns based on viewport)
-- Glassmorphic card design
-
-**User Experience:**
-- Visual skill representation with icons
-- Engaging entrance animations
-- Clear categorization
-- Easy navigation back to home
+- Data from `constants/data/Service.tsx`, grouped by file name in `skill/page.tsx` (`CATALOG`)
+- Icons: project PNGs plus Simple Icons SVGs (CC0) in `public/image/skills/`
+- `WorldBackdrop` at the Skills stop: environment only, slow camera drift, CSS blur
 
 ---
 
 #### 3. Portfolio Page (`/portofolio`)
 
-**Status:** ✅ Implemented
+**Status:** ✅ Implemented (v2.0)
 
 **Description:**
-Showcase of completed projects with images, descriptions, technologies used, and links.
-
-**Key Elements:**
-- Project cards with images
-- Project titles and descriptions
-- Technology tags for each project
-- External links to live projects
-- Responsive grid layout
-- Animated card entrance
-
-**Project Information:**
-- Project thumbnail/screenshot
-- Project name
-- Technology stack used
-- Project type (Web/Mobile)
-- Link to live project (if available)
+A "Project manifest": 18 projects with a screenshot, type badge, stack line and a live link (or "Internal or archived"), filterable by All / Web / Mobile, over the blurred town.
 
 **Technical Implementation:**
-- Client Component ('use client')
-- Framer Motion random motion animations
-- Next.js Image component with responsive sizing
-- Conditional rendering for mobile/web projects
-- External link handling
-- Glassmorphic card design
-- Hover effects
-
-**User Experience:**
-- Visual project showcase
-- Clear technology indication
-- Easy access to live projects
-- Engaging animations
-- Responsive layout
+- Data from `ourPortofolio` in `constants/data/Service.tsx`
+- Segmented filter with counts; `portfolio_filter_used` and `project_clicked` events
+- The footer CTA opens the portfolio Google Drive archive
 
 ---
 
@@ -294,66 +252,26 @@ Showcase of completed projects with images, descriptions, technologies used, and
 
 **Status:** ✅ Implemented
 
-**Description:**
-Global layout with consistent styling, font loading, and metadata.
-
 **Key Elements:**
-- Root layout component
-- Custom font loading (Montserrat, Inter, Poppins)
-- Global styles
-- Metadata and SEO tags
-- OpenGraph configuration
-- Favicon
-
-**Technical Implementation:**
-- Server Component layout
-- Next.js font optimization
-- MotionLazy wrapper for animations
-- Global CSS variables
-- SEO-friendly metadata
+- Root layout with Geist and Geist Mono (local fonts), metadata and OpenGraph
+- PostHog provider with SPA pageview and page-leave tracking
+- Detail routes share `SubHeader` (back to the journey, Skills, Portfolio, Drive)
 
 ---
 
 ### Supporting Features
 
-#### 1. MotionLazy Component
+#### 1. Procedural 3D Kit
+- `Block`, `OfficeBuilding` (1–2 floors), `GableRoof` (ribbed), `Truck` (box/container), `Car`, `Tree`, `Pin`, `Screen`, `ContactBlob`
+- A cartoon walker (`Character.tsx`) with a walk cycle, idle and wave. It can be swapped for a rigged GLB later
 
-**Purpose:** Optimize bundle size by lazy loading Framer Motion
-
-**Implementation:**
-- Dynamic import of Framer Motion
-- Lazy loading wrapper
-- Motion feature configuration
-- Performance optimization
-
-#### 2. UI Components
-
-**Button Component:**
-- Multiple variants (primary, secondary, destructive, ghost, link)
-- Multiple sizes (default, sm, lg, icon)
-- Radix UI slot pattern
-- Class variance authority
-- Full accessibility support
-
-**Carousel Component:**
-- Embla Carousel integration
-- Autoplay support
-- Auto-scroll functionality
-- Wheel gesture support
-- Responsive design
-- Keyboard navigation
+#### 2. Capability & Fallbacks
+- `capability.ts` detects WebGL, low-power devices and reduced motion
+- `StaticWorld.tsx` cross-fades the stills for the active stop and its neighbours
 
 #### 3. Utilities
-
-**cn() Function:**
-- Class name merging
-- Tailwind conflict resolution
-- Conditional classes
-
-**mergeOpenGraph():**
-- OpenGraph metadata generation
-- SEO optimization
-- Social media preview
+- `cn()` for class merging, `mergeOpenGraph()` for OpenGraph metadata
+- `useSectionTracking` / `useClickTracking` (PostHog)
 
 ---
 
@@ -465,9 +383,11 @@ Acceptance Criteria:
 | UI Library | React | ^18 | ✅ |
 | Language | TypeScript | ^5 | ✅ |
 | Styling | Tailwind CSS | ^3.4.1 | ✅ |
-| Animations | Framer Motion | ^12.18.1 | ✅ |
-| UI Components | Radix UI | ^1.2.3 | ✅ |
+| 3D Engine | three.js | ^0.169.0 | ✅ |
+| 3D Renderer | @react-three/fiber | ^8.17.10 | ✅ |
+| 3D Helpers | @react-three/drei | ^9.117.3 | ✅ |
 | Icons | Lucide React | ^0.522.0 | ✅ |
+| Analytics | posthog-js | ^1.393.3 | ✅ |
 
 ### Development Requirements
 
@@ -508,63 +428,42 @@ Acceptance Criteria:
 
 ## Design Requirements
 
+The full visual system (tokens, components, 3D materials, named rules) is documented in `DESIGN.md`. The summary:
+
 ### Design System
 
-**Color Palette:**
-- CSS variables for theming
-- HSL color format
-- Support for dark mode (future)
+**Colour:**
+- Porcelain-cool ground (`#e0e7f5`), white walls, cobalt structure and actions (`#2f5bea`)
+- **One amber** (`#f4a51c`) reserved for "you are here": the active stop, the walker's hoodie and the active stepper dot
+- Tokens are `--j-*` CSS variables in `globals.css`, mirrored in `World/palette.ts`
 
 **Typography:**
-- **Primary Font**: Montserrat (body, headings)
-- **Secondary Font**: Inter (UI elements)
-- **Accent Font**: Poppins (special elements)
-- Variable fonts for optimization
-- Responsive font sizes
+- **Geist**: headings, body, UI
+- **Geist Mono**: periods, stop IDs and counts only
 
-**Spacing:**
-- Tailwind CSS spacing scale
-- Consistent padding/margin
-- Responsive spacing
-
-**Border Radius:**
-- Multiple radius options (sm, md, lg)
-- Inverted radius support
-- Consistent rounding
+**Panels:**
+- Solid white, 20px radius, 1px ink hairline, soft two-layer shadow; no glass or transparency over the world
 
 ### Visual Design
 
-**Glassmorphism:**
-- Backdrop blur effects
-- Semi-transparent backgrounds
-- Border with transparency
-- Shadow for depth
+**World:**
+- Orthographic isometric low-poly town; soft-edged blocks, ribbed cobalt roofs, contact shadows
+- The walker is a rounded cartoon at human scale relative to the buildings
 
 **Animation Principles:**
-- Smooth transitions (0.3-0.8s duration)
-- Easing functions (easeOut, easeInOut)
-- Staggered animations for lists
-- Entrance animations
-- Hover effects
+- Motion is scroll-driven (walk, step-in), with ambient traffic and, on detail routes, a slow camera drift
+- UI transitions are 200–300ms with `cubic-bezier(0.16, 1, 0.3, 1)`
+- Reduced motion snaps the walker and parks traffic
 
 **Responsive Breakpoints:**
-- Mobile: < 640px
-- Tablet: 640px - 1024px
-- Desktop: > 1024px
-- Large Desktop: > 1280px
+- Compact: < 1024px (bottom sheet, pager stepper, foldable panel, active label only)
+- Desktop: ≥ 1024px (right-hand card, 12-stop stepper)
+- Short desktop: ≥ 1024px and height ≤ 800px (tighter card type)
 
 ### Layout Patterns
 
-**Grid System:**
-- Flexbox and CSS Grid
-- Responsive columns
-- Auto-fit/auto-fill patterns
-
-**Component Structure:**
-- Card-based layout
-- Glassmorphic containers
-- Consistent spacing
-- Visual hierarchy
+- One card per stop. No card grids on the journey
+- Detail routes: the page head in a panel; skills in masonry bays; projects in a 1/2/3-column tile grid
 
 ---
 

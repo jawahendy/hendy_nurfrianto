@@ -26,13 +26,27 @@ This document provides a comprehensive overview of all technologies, frameworks,
 
 ## Frontend Stack
 
+### 3D World (career journey)
+
+| Library | Version | Purpose | Usage |
+|---------|---------|---------|-------|
+| **three** | ^0.169.0 | WebGL 3D engine | Orthographic isometric town, lighting, shadows |
+| **@react-three/fiber** | ^8.17.10 | React renderer for three.js (React 18 line) | `Canvas`, `useFrame` render loop in `components/Journey/World` |
+| **@react-three/drei** | ^9.117.3 | R3F helpers | `RoundedBox`, `Html` pin labels, `useTexture` |
+| **@types/three** | ^0.169.0 | Type definitions (dev) | Strict TypeScript for scene code |
+
+The 3D scene is procedural: no GLB/model files. Buildings, vehicles, trees and the
+cartoon walker are composed from primitives in `World/Kit.tsx`, `World/Landmarks.tsx`
+and `World/Character.tsx`. The scene chunk is loaded with `next/dynamic` (`ssr: false`),
+so it never blocks first paint.
+
 ### UI Framework & Components
 
 | Library | Version | Purpose | Usage |
 |---------|---------|---------|-------|
-| **Radix UI** | ^1.2.3 | Unstyled, accessible UI primitives | Button, Carousel slots |
-| **@radix-ui/react-slot** | ^1.2.3 | Composition utility for merging props | Component composition |
-| **Lucide React** | ^0.522.0 | Icon library with React components | Icons throughout the app |
+| **Lucide React** | ^0.522.0 | Icon library with React components | Icons in the journey overlay and detail routes |
+| **Simple Icons (SVG files)** | n/a | Brand logos (CC0) copied into `public/image/skills/*.svg` | AI and tooling logos on `/skill` |
+| **@radix-ui/react-slot** | ^1.2.3 | Composition utility | *Installed but unused since the 3D redesign; candidate for removal* |
 
 ### Styling
 
@@ -44,17 +58,17 @@ This document provides a comprehensive overview of all technologies, frameworks,
 | **@butterfail/tailwindcss-inverted-radius** | ^0.1.2 | Custom border radius utilities | Inverted radius effects |
 | **tailwind-merge** | ^3.3.1 | Merge Tailwind classes intelligently | Conflict resolution |
 | **clsx** | ^2.1.1 | Utility for constructing className strings | Conditional classes |
-| **class-variance-authority** | ^0.7.1 | Variant-based component styling | Component variants |
+| **class-variance-authority** | ^0.7.1 | Variant-based component styling | *Unused since the redesign; candidate for removal* |
 
 ### Animation & Motion
 
 | Library | Version | Purpose | Features |
 |---------|---------|---------|----------|
-| **Framer Motion** | ^12.18.1 | Animation library for React | Page transitions, component animations |
-| **Embla Carousel React** | ^8.6.0 | Carousel library | Image/content carousels |
-| **embla-carousel-autoplay** | ^8.6.0 | Autoplay plugin for Embla | Automatic carousel progression |
-| **embla-carousel-auto-scroll** | ^8.6.0 | Auto-scroll plugin | Continuous scrolling |
-| **embla-carousel-wheel-gestures** | ^8.0.2 | Mouse wheel support | Enhanced user interaction |
+| **Framer Motion** | ^12.18.1 | Animation library for React | Only the `MotionLazy` provider remains; no component animates with it after the redesign |
+| **Embla Carousel** (+ autoplay, auto-scroll, wheel-gestures) | ^8.x | Carousel library | *Unused since the redesign; candidates for removal* |
+
+Motion in the journey is authored in the R3F render loop (`useFrame`), driven by scroll
+progress in `components/Journey/store.ts`, plus CSS transitions on the overlay.
 
 ## Development Stack
 
@@ -90,11 +104,11 @@ This document provides a comprehensive overview of all technologies, frameworks,
 ## Font Stack
 
 ### Custom Fonts
-- **Montserrat** (Primary font family)
-- **Inter** (Secondary font)
-- **Poppins** (Accent font)
+- **Geist** (voice: headings, body, UI), local variable font `src/assets/fonts/GeistVF.woff`
+- **Geist Mono** (periods, stop IDs, counts only), local `GeistMonoVF.woff`
 
-All fonts are loaded via Next.js font optimization for optimal performance.
+Both are loaded with `next/font/local` in `src/constants/fonts.tsx`. Montserrat, Inter and
+Poppins were removed in the redesign, so no Google Fonts request is made.
 
 ## Package Manager
 
@@ -147,8 +161,11 @@ All fonts are loaded via Next.js font optimization for optimal performance.
 ## API & External Services
 
 ### Current Integration
-- No external APIs currently integrated
-- All content is static
+- **PostHog** product analytics (`src/providers/PostHogProvider.tsx`, `src/hooks/useTracking.ts`),
+  proxied through Next.js rewrites at `/ingest`. Events include `section_viewed`, `cta_clicked`,
+  `project_clicked`, `stepper_clicked`, `panel_toggled`, `nav_clicked`, `portfolio_filter_used`.
+- Portfolio archive links out to a Google Drive folder (`PORTFOLIO_DRIVE_URL` in `constants/data/journey.ts`).
+- All page content is static (from `constants/data/`).
 
 ### Potential Integrations
 - **Analytics**: Google Analytics, Plausible
@@ -168,9 +185,16 @@ All fonts are loaded via Next.js font optimization for optimal performance.
 6. **Compression**: Gzip/Brotli compression
 
 ### Lazy Loading
-- Framer Motion via MotionLazy wrapper
-- Component-level code splitting
-- Dynamic imports where beneficial
+- The WebGL scene (`World/Scene.tsx`, ~169 KB gzip with three.js) is a dynamic import, loaded after first paint
+- Detail routes reuse the same chunk for their blurred backdrop
+- Scene textures are small WebP files in `public/image/journey/` (screens ≤ 768px, skill crates 128px)
+
+### 3D Performance Budget
+- Low-power devices (≤4 cores, ≤4 GB memory or width < 768px): no shadow maps, DPR capped at 1.25
+- Backdrop mode on detail routes always caps DPR at 1.25 (it is blurred anyway)
+- Shadow map 2048px that follows the camera; contact "blob" textures instead of extra shadow casters
+- No WebGL: pre-rendered per-stop stills (`public/image/journey/stills/stage-N.webp`, ~560 KB total, only the active stop ±1 mounted)
+- `prefers-reduced-motion`: walker and camera snap to stops, traffic and camera drift are parked
 
 ## Security Technologies
 
@@ -193,9 +217,12 @@ All fonts are loaded via Next.js font optimization for optimal performance.
 - **Playwright/Cypress**: E2E testing
 - **Lighthouse CI**: Performance testing
 
-## Monitoring & Analytics (Future)
+## Monitoring & Analytics
 
-### Recommended Tools
+### In Use
+- **PostHog**: product analytics (see API & External Services)
+
+### Recommended Additions
 - **Vercel Analytics**: Performance and user analytics
 - **Sentry**: Error tracking
 - **Google Analytics/Plausible**: User behavior analytics
@@ -210,13 +237,13 @@ All fonts are loaded via Next.js font optimization for optimal performance.
 ## Design System
 
 ### Design Tokens
-- Color system via CSS variables (HSL format)
-- Spacing scale via Tailwind
-- Typography scale (font families and sizes)
-- Border radius system
+- The visual system is documented in `DESIGN.md` at the project root (generated with the Impeccable skill)
+- Colour tokens are `--j-*` CSS custom properties in `src/app/globals.css`, mirrored for 3D materials in
+  `src/components/Journey/World/palette.ts`; keep the two in sync
+- Overlay components are plain CSS classes (`.j-card`, `.j-stepper`, `.j-btn`, …) in `globals.css`
 
 ### Accessibility
-- Radix UI for accessible primitives
+- All journey copy is real DOM text; the WebGL canvas is `aria-hidden`
 - Semantic HTML structure
 - ARIA attributes where needed
 - Keyboard navigation support
@@ -269,12 +296,11 @@ All fonts are loaded via Next.js font optimization for optimal performance.
 - Extensive customization options
 - Great developer experience
 
-### Why Framer Motion?
-- Powerful animation capabilities
-- React-first API
-- Spring animations for natural movement
-- Gesture support
-- Layout animations
+### Why React Three Fiber?
+- Declarative three.js scenes in React, sharing state and props with the DOM overlay
+- `useFrame` gives a per-frame loop for scroll-driven walking, traffic and camera without React re-renders
+- drei provides production helpers (rounded geometry, DOM labels, texture loading)
+- A real 3D world doubles as proof of the AR/VR/Unity side of the CV
 
 ### Why TypeScript?
 - Type safety prevents bugs

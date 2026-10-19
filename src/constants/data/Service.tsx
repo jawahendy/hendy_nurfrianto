@@ -267,6 +267,76 @@ export const Skills2 = {
 					src: '/image/skills/Redis.png',
 					style: { aspectRatio: 80 / 97, maxHeight: 97 },
 				},
+				{
+					alt: 'Claude Code',
+					src: '/image/skills/claude.svg',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'MCP',
+					src: '/image/skills/mcp.svg',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'Vercel AI SDK',
+					src: '/image/skills/vercel.svg',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'GitHub Copilot',
+					src: '/image/skills/copilot.svg',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'Cursor',
+					src: '/image/skills/cursor.svg',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'GitHub',
+					src: '/image/skills/github.svg',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'Figma',
+					src: '/image/skills/figma.svg',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'Jest',
+					src: '/image/skills/jest.svg',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'Testing Library',
+					src: '/image/skills/testinglibrary.svg',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'Express.js',
+					src: '/image/skills/express.svg',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'Swift',
+					src: '/image/skills/swift.svg',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'PostHog',
+					src: '/image/skills/posthog.svg',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'Blender',
+					src: '/image/skills/blender.svg',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
+				{
+					alt: 'Shopify',
+					src: '/image/skills/shopify.svg',
+					style: { aspectRatio: 80 / 97, maxHeight: 97 },
+				},
 			],
 		},
 	],

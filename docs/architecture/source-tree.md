@@ -11,6 +11,7 @@ hendy_nurfrianto/
 ├── .bmad-core/              # BMad Method configuration and resources
 ├── .claude/                 # Claude AI configuration and commands
 ├── .git/                    # Git version control
+├── .impeccable/             # Impeccable design-skill workspace (gitignored): surface brief, design.json, raster provenance
 ├── .next/                   # Next.js build output (generated)
 ├── docs/                    # Project documentation
 │   └── architecture/        # Architecture documentation
@@ -18,13 +19,15 @@ hendy_nurfrianto/
 ├── public/                  # Static assets served directly
 ├── src/                     # Source code (main application)
 ├── .gitignore              # Git ignore rules
-├── components.json          # shadcn/ui configuration
+├── components.json          # shadcn/ui configuration (legacy)
+├── DESIGN.md                # Visual design system (tokens, components, 3D world rules)
 ├── LICENSE                  # Project license
 ├── next.config.mjs          # Next.js configuration
 ├── next-env.d.ts           # Next.js TypeScript declarations
 ├── package.json            # npm package configuration
 ├── package-lock.json       # npm lock file
 ├── postcss.config.mjs      # PostCSS configuration
+├── PRODUCT.md              # Product truth: audiences, purpose, evidence, principles
 ├── README.md               # Project readme
 ├── tailwind.config.ts      # Tailwind CSS configuration
 └── tsconfig.json           # TypeScript configuration
@@ -36,46 +39,49 @@ hendy_nurfrianto/
 
 ```
 src/
-├── app/                    # Next.js 14 App Router
-│   ├── favicon.ico        # Site favicon
-│   ├── globals.css        # Global styles
-│   ├── layout.tsx         # Root layout component
-│   ├── page.tsx           # Home page (/)
-│   ├── portofolio/        # Portfolio page route
-│   │   └── page.tsx       # Portfolio page component
-│   └── skill/             # Skills page route
-│       └── page.tsx       # Skills page component
+├── app/                        # Next.js 14 App Router
+│   ├── globals.css             # Design tokens (--j-*) and every .j-* component style
+│   ├── layout.tsx              # Root layout: Geist fonts, metadata, PostHog provider
+│   ├── page.tsx                # Home (/) → <Journey />
+│   ├── icon.tsx, apple-icon.tsx # Generated favicons
+│   ├── portofolio/page.tsx     # Project manifest (filterable), over the blurred town
+│   └── skill/page.tsx          # Skills inventory (grouped bays), over the blurred town
 │
-├── assets/                # Static assets (fonts, images)
-│   └── fonts/            # Custom font files
-│       ├── GeistMonoVF.woff
-│       └── GeistVF.woff
+├── assets/fonts/               # GeistVF.woff, GeistMonoVF.woff (local variable fonts)
 │
-├── components/            # React components
-│   ├── Home/             # Home page components
-│   │   ├── index.tsx     # Home page main component
-│   │   ├── Desktop.tsx   # Desktop layout variant
-│   │   └── Mobile.tsx    # Mobile layout variant
+├── components/
+│   ├── Journey/                # The 3D career journey
+│   │   ├── index.tsx           # Scroll journey: sections, hero, top bar, stepper, mobile panel fold
+│   │   ├── StageCard.tsx       # Card bodies per stage kind (work, education, skills, projects, contact)
+│   │   ├── SubHeader.tsx       # Top bar for the detail routes
+│   │   ├── WorldBackdrop.tsx   # Environment-only blurred town behind /skill and /portofolio
+│   │   ├── StaticWorld.tsx     # No-WebGL fallback: cross-fading pre-rendered stills
+│   │   ├── capability.ts       # WebGL / low-power / reduced-motion detection
+│   │   ├── store.ts            # Scroll progress + walker state shared with the render loop
+│   │   └── World/              # React Three Fiber scene (client only, dynamic import)
+│   │       ├── Scene.tsx       # Canvas, camera rig, lights, ground, road, sidewalk, traffic, pins
+│   │       ├── Character.tsx   # Procedural cartoon walker and its walk/idle/wave animation
+│   │       ├── Landmarks.tsx   # One landmark per stage (campus, offices, mine, showroom, refinery, …)
+│   │       ├── Kit.tsx         # Primitives: Block, OfficeBuilding, GableRoof, Truck, Car, Tree, Pin, Screen, …
+│   │       └── palette.ts      # 3D material colours (mirror of the CSS tokens)
 │   │
-│   ├── Marquee/          # Marquee scrolling component
-│   │   └── index.tsx
-│   │
-│   ├── MotionLazy/       # Lazy-loaded Framer Motion wrapper
-│   │   ├── index.tsx     # Main component
-│   │   └── features.tsx  # Motion features configuration
-│   │
-│   └── ui/               # UI primitives (Radix UI based)
-│       ├── button.tsx    # Button component
-│       └── carousel.tsx  # Carousel component
+│   └── MotionLazy/             # LazyMotion provider (legacy, no animations use it now)
 │
-├── constants/             # Static data and configuration
-│   ├── fonts.tsx         # Font definitions and imports
-│   └── data/             # Static content data
-│       └── Service.tsx   # Service/offering data
+├── constants/
+│   ├── fonts.tsx               # geistSans, geistMono (next/font/local)
+│   └── data/
+│       ├── journey.ts          # Stages (CV-verbatim), skill groups, featured projects, contact, Drive URL
+│       └── Service.tsx         # Skill icon list and full portfolio list (used by /skill and /portofolio)
 │
-└── lib/                   # Utility functions and helpers
-    ├── mergeOpenGraph.ts # OpenGraph metadata utilities
-    └── utils.ts          # General utility functions
+├── hooks/
+│   └── useTracking.ts          # PostHog section/click tracking
+│
+├── lib/
+│   ├── mergeOpenGraph.ts       # OpenGraph metadata
+│   └── utils.ts                # cn() class merger
+│
+└── providers/
+    └── PostHogProvider.tsx     # PostHog init + SPA pageview tracking
 ```
 
 ## Directory Descriptions
@@ -120,12 +126,17 @@ public/
 │   └── PP.jpg
 └── image/               # Images organized by category
     ├── clients/         # Client logos
-    ├── skills/          # Technology/skill icons
+    ├── skills/          # Technology/skill icons (PNG, plus Simple Icons SVGs for AI and tooling)
+    ├── porto/           # Full-size project screenshots (portfolio page)
+    ├── journey/         # Compact WebP textures for the 3D scene (screens, skill crates)
+    │   └── stills/      # stage-0..11.webp: no-WebGL fallback stills rendered from the scene
     ├── PP.jpg           # Profile picture
     ├── Web.png          # Web screenshot
     ├── Web.jpg
     └── Mobile.png       # Mobile screenshot
 ```
+
+The stills must be re-rendered whenever the scene changes (landmarks, character, lighting).
 
 ### Source Code (`src/`)
 
@@ -163,33 +174,31 @@ Contains assets that need to be imported in source code (as opposed to `public/`
 
 Reusable React components organized by feature or type.
 
-##### `components/Home/`
-Home page-specific components with responsive variants.
+##### `components/Journey/`
+The career journey: a full-bleed WebGL town behind real DOM content.
 
 | File | Purpose |
 |------|---------|
-| `index.tsx` | Main Home component wrapper |
-| `Desktop.tsx` | Desktop layout implementation |
-| `Mobile.tsx` | Mobile layout implementation |
+| `index.tsx` | Builds one 100svh section per stage, maps scroll progress to `journey.stage`, renders the top bar, stepper and mobile panel toggle |
+| `StageCard.tsx` | Card content per stage kind; all career text comes from `constants/data/journey.ts` |
+| `WorldBackdrop.tsx` | Reuses the scene in `mode="backdrop"` (no walker, no pins, slow camera drift, CSS blur) for detail routes |
+| `StaticWorld.tsx` | Fallback stills when WebGL is unavailable |
+| `capability.ts` | Detects WebGL, low-power devices and `prefers-reduced-motion` |
+| `store.ts` | Mutable state read every frame (`journey.stage`, `walker.x/z/speed`) plus easing helpers |
 
-##### `components/Marquee/`
-Marquee/scrolling text component implementation.
+##### `components/Journey/World/`
+The React Three Fiber scene. Everything is procedural geometry; there are no model files.
+
+| File | Purpose |
+|------|---------|
+| `Scene.tsx` | Orthographic camera rig (follows the walker or drifts in backdrop mode), lights, ground, road, sidewalk, two-way traffic, pins and labels |
+| `Character.tsx` | Cartoon walker: walks the sidewalk, steps into each yard, idles and waves; swap for a GLB later |
+| `Landmarks.tsx` | Landmark per stage; work stops are 1–2 floor offices (Celerates is a tower) with themed yard props |
+| `Kit.tsx` | Shared primitives and the shared contact-shadow texture |
+| `palette.ts` | Material colours; keep in sync with `--j-*` tokens in `globals.css` |
 
 ##### `components/MotionLazy/`
-Lazy-loaded Framer Motion wrapper to reduce initial bundle size.
-
-| File | Purpose |
-|------|---------|
-| `index.tsx` | Lazy loading wrapper component |
-| `features.tsx` | Motion features configuration |
-
-##### `components/ui/`
-Base UI components following Radix UI patterns.
-
-| Component | Purpose | Based On |
-|-----------|---------|----------|
-| `button.tsx` | Button component with variants | Radix UI Slot |
-| `carousel.tsx` | Carousel component | Embla Carousel + Radix UI |
+Lazy-loaded Framer Motion provider kept from the previous version; nothing animates with it now.
 
 #### `src/constants/` - Constants and Static Data
 
@@ -197,8 +206,9 @@ Configuration, constants, and static content.
 
 | File | Purpose | Exports |
 |------|---------|---------|
-| `fonts.tsx` | Font definitions | `inter`, `montserrat`, `poppins` |
-| `data/Service.tsx` | Service/offering data | Service list data |
+| `fonts.tsx` | Font definitions | `geistSans`, `geistMono` |
+| `data/journey.ts` | Journey content (CV-verbatim) | `STAGES`, `SKILL_GROUPS`, `FEATURED_PROJECTS`, `SKILL_CRATES`, `CONTACT`, `PORTFOLIO_DRIVE_URL`, `STAGE_SPACING` |
+| `data/Service.tsx` | Skill icons and portfolio list | `Skills`, `Skills2`, `ourPortofolio`, `ourClientData` |
 
 #### `src/lib/` - Utility Functions
 
@@ -323,6 +333,8 @@ npm package dependencies.
 public/image/
 ├── clients/     # Client/company logos
 ├── skills/      # Technology/skill icons
+├── porto/       # Project screenshots
+├── journey/     # 3D scene textures + fallback stills
 ├── PP.jpg       # Profile picture
 ├── Web.png      # Screenshots
 └── Mobile.png
@@ -365,16 +377,13 @@ docs/
 ## Source Code Metrics
 
 ### Current Structure (Approximate)
-- **Total Source Files**: ~25-30 TypeScript/TSX files
-- **Components**: ~12 components
-- **Pages/Routes**: 3 routes (home, skill, portfolio)
-- **Utility Files**: 2 files
-- **Configuration Files**: 5 files
+- **Total Source Files**: 27 TypeScript/TSX files
+- **Journey components**: 7 DOM files + 5 scene files
+- **Pages/Routes**: 3 routes (home journey, skill, portfolio)
 
 ### Lines of Code (Estimated)
-- **Application Code**: ~1,000-1,500 lines
-- **Configuration**: ~200 lines
-- **Styles**: ~100 lines
+- **Application Code**: ~3,500 lines (about 2,100 in `components/Journey`, including the 3D scene)
+- **Styles**: ~1,300 lines (`globals.css`)
 
 ## Future Structure Considerations
 
@@ -406,6 +415,7 @@ src/
   - `.next/`
   - `.env*.local`
   - Build outputs
+  - `.impeccable/` (design-skill workspace)
 
 ## Key Architectural Decisions
 
@@ -426,12 +436,20 @@ src/
 - `@/*` alias for cleaner imports
 - Reduces import path complexity
 
+### 5. DOM Content Over a WebGL World
+- Every word on the journey is real DOM text; the canvas is decoration (`aria-hidden`)
+- Scroll position is the single input: `journey.stage` in `store.ts` drives walker, camera and the stepper
+- Scene state lives outside React and is read in `useFrame`, so scrolling never re-renders React per frame
+- Fallbacks: reduced motion snaps to stops; no WebGL shows pre-rendered stills
+
 ## Navigation & Routing Map
 
 ```
-/ (Home)
-├── /skill (Skills Page)
-└── /portofolio (Portfolio Page)
+/ (Home: 12-stop scroll journey)
+│   Start → Gunadarma → Adicipta → Celerates → Gordi → Pama Persada → Mitra Solusi
+│   → Astra → Radiant → Skills → Projects → Contact
+├── /skill (Skills inventory)
+└── /portofolio (Project manifest)
 ```
 
 **Route Structure:**
